@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".85">
+            <include layout="@layout/public_home_page_news_menu_holder"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15">
+            <io.supercharge.shimmerlayout.ShimmerLayout
+                android:id="@+id/shimmer_footer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_animation_duration="1200"
+                app:shimmer_auto_start="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/adv_url"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/avatar_background_rectangle"/>
+            </io.supercharge.shimmerlayout.ShimmerLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "546869844465",
+    "firebase_url": "https://icapp-120ae.firebaseio.com",
+    "project_id": "icapp-120ae",
+    "storage_bucket": "icapp-120ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546869844465:android:41ea7407bd537f5a",
+        "android_client_info": {
+          "package_name": "com.rezaandreza.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546869844465-53n1dip6dne7jmc98ieqm63u30ld3h9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rezaandreza.shop",
+            "certificate_hash": "5736dcb49ba9be3c7fe971c8b0647a14be87be02"
+          }
+        },
+        {
+          "client_id": "546869844465-7k6ofbs0ndv4c5d3krttol5ujtfnj0tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRm2ymlr3mLh19fxvghp2Pb5oxcyxJBQw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546869844465-7k6ofbs0ndv4c5d3krttol5ujtfnj0tq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

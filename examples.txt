@@ -1,0 +1,282 @@
+﻿package personal.framework;
+
+import android.app.ProgressDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import personal.framework.Configuration.Season;
+import personal.framework.Helper.Debug;
+import personal.framework.Model.Application.Movie;
+import personal.framework.Model.Application.Year;
+import personal.framework.Model.Database.AreaCode;
+import personal.framework.System.AsyncTask.BaseAsyncTask;
+import personal.framework.System.Model.Service.BaseDataService;
+import personal.framework.System.UI.LayoutDataBind;
+import personal.framework.System.UI.ViewModifier;
+
+import static personal.framework.Helper.Debug.print;
+
+public class MainActivity extends AppCompatActivity {
+    private Button button;
+    private EditText time;
+    private TextView finalResult;
+    BaseAsyncTask runner;
+    String sleepTime;
+    int timer=1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Season.__InitiatSeason(this);
+
+        AreaCode a = new AreaCode();
+        a.setParentID(0);
+        a.setAreaName("Bng");
+        a.setAreaNameEng("Eng");
+        a.setActive_stat(1);
+        a.setLast_update("ooiooio");
+        a.insert();
+
+
+        Debug.print(a.selectAll());
+
+
+        BaseDataService m = new BaseDataService();
+        m.url = "http://www.omdbapi.com";
+        Movie mv = new Movie();
+        mv.Title = "batman";
+        m.outputToModel = mv;
+        m.parameterdataClass = mv;
+        m.parametervariableMapping.put("Title","t");
+        //m.parameter.put("t","batman");
+        m.getDataFromURLModel(this,"output");
+
+        //ViewModifier.getView("in_time","তেস্ত করা হচ্ছে");
+       // ViewModifier.getView("btn_run","তেস্ত করা হচ্ছে");
+       // ViewModifier.getView("tv_result","তেস্ত করা হচ্ছে");
+
+
+        //finalResult.setText("তেস্ত করা হচ্ছে");
+
+       /* button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runner = new BaseAsyncTask();
+                sleepTime = time.getText().toString();
+                runner.setObjects(Season.applicationContext);
+                runner.callBackPerExecuteMethod="pre";
+                runner.callBackExecuteMethod="run";
+                runner.callBackPosExecuteMethod="post";
+                runner.callBackPublishExecuteMethod="update";
+                runner.execute();
+            }
+        });*/
+
+    }
+
+   /* public void pre(String data)
+    {
+        runner.progressDialog = ProgressDialog.show(MainActivity.this,"ProgressDialog","Wait for "+time.getText().toString()+ " seconds");
+    }
+    public void post(String data)
+    {
+        runner.progressDialog.dismiss();
+        finalResult.setText("Done");
+    }
+    public void update(String data)
+    {
+        runner.progressDialog.setMessage(data);
+        finalResult.setText(data);
+    }
+    public void run(String data)
+    {
+        for(timer=1;timer<=Integer.parseInt(sleepTime);timer++)
+        {
+            System.out.println("time: "+timer);
+            try {
+                int time = 1000;
+                Thread.sleep(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            runner.updateView("Wait for "+(Integer.parseInt(sleepTime)-timer)+ " seconds");
+           // runner.progressDialog = ProgressDialog.show(MainActivity.this,"ProgressDialog","Wait for "+(Integer.parseInt(sleepTime)-timer)+ " seconds");
+            //runner.publishProgress("Sleeping...");
+            //finalResult.setText("Wait for "+(Integer.parseInt(sleepTime)-timer));
+        }
+    }*/
+
+
+
+    public void output(ArrayList<?> data)
+    {
+        print(data);
+        HashMap<String, String> m = new HashMap<String, String>() {{
+            put("Plot","Plots");
+        }};
+        LayoutDataBind.setView(data.get(0),m);
+        /*Year y = new Year();
+        y.map.put("name","Title");
+        y.map.put("releaseYear","Year");
+        y.fixedData.put("status","1");
+        ArrayList<Object> ar =  y.migrate(Year.class,data);*/
+       // print(ar);
+    }
+
+
+
+
+
+}
+
+
+
+
+void dbUrl()
+    {
+        AreaCode a = new AreaCode();
+        a.setParentID(0);
+        a.setAreaName("Bng");
+        a.setAreaNameEng("Eng");
+        a.setActive_stat(1);
+        a.setLast_update("ooiooio");
+        a.insert();
+
+        //Debug.print(a.selectAll());
+
+
+        BaseDataService m = new BaseDataService();
+        m.url = "http://www.omdbapi.com";
+        Movie mv = new Movie();
+        mv.Title = "batman";
+        m.outputToModel = mv;
+        m.parameterdataClass = mv;
+        m.parametervariableMapping.put("Title","t");
+        //m.parameter.put("t","batman");
+        // m.getDataFromURLModel(this,"output");
+    }
+    public void output(ArrayList<?> data)
+    {
+        print(data);
+        HashMap<String, String> m = new HashMap<String, String>() {{
+            put("Plot","Plots");
+        }};
+        LayoutDataBind.setView(data.get(0),m);
+
+    }
+	
+	
+	
+	
+	package com.rezaandreza.icapp;
+
+import android.Manifest;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import com.jaredrummler.android.device.DeviceName;
+
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
+import com.rezaandreza.icapp.Activities.Public.Instruction.Instructions;
+import com.rezaandreza.icapp.Activities.Public.Instruction.Models.Instruction;
+import com.rezaandreza.icapp.Configuration.Display;
+import com.rezaandreza.icapp.Configuration.Season;
+import com.rezaandreza.icapp.Helper.Debug;
+import com.rezaandreza.icapp.Model.Application.Movie;
+import com.rezaandreza.icapp.Model.Application.Year;
+import com.rezaandreza.icapp.Model.Database.AreaCode;
+import com.rezaandreza.icapp.System.AsyncTask.BaseAsyncTask;
+import com.rezaandreza.icapp.System.Helper.DeviceInformation;
+import com.rezaandreza.icapp.System.Permission.PermissionSettings;
+import com.rezaandreza.icapp.System.Service.BaseDataService;
+import com.rezaandreza.icapp.System.Service.BaseImageDownloader;
+import com.rezaandreza.icapp.System.UI.LayoutDataBind;
+import com.rezaandreza.icapp.System.UI.ViewModifier;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import static com.rezaandreza.icapp.Helper.Debug.print;
+import static com.rezaandreza.icapp.System.Service.BaseImageDownloader.stringToURL;
+import static com.rezaandreza.icapp.System.UI.ViewModifier.getView;
+
+public class MainActivity extends AppCompatActivity {
+  
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+        Season.__InitiatSeason(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Specify some url to download images
+        final URL url1 = stringToURL("http://www.freeimageslive.com/galleries/transtech/informationtechnology/pics/beige_keyboard.jpg");
+        final URL url2 = stringToURL("http://www.freeimageslive.com/galleries/transtech/informationtechnology/pics/computer_blank_screen.jpg");
+        final URL url3 = stringToURL("http://www.freeimageslive.com/galleries/transtech/informationtechnology/pics/computer_memory_dimm.jpg");
+        final URL url4 = stringToURL("http://www.freeimageslive.com/galleries/transtech/informationtechnology/pics/computer_memory.jpg");
+        final URL url5 = stringToURL("http://www.freeimageslive.com/galleries/transtech/informationtechnology/pics/ethernet_router.jpg");
+
+
+        // Execute the async task
+        AsyncTask mMyTask = new BaseImageDownloader(this,"ImageDownloadComplete")
+                .execute(
+                        url1,
+                        url2,
+                        url3,
+                        url4,
+                        url5
+                );
+        ////Intent intent = new Intent(MainActivity.this, Instructions.class);
+        //intent.putExtra("keyName","value");
+       // startActivity(intent);
+        //finish();
+    }
+
+    public void ImageDownloadComplete(ArrayList<Bitmap> bitmaps)
+    {
+        for(int i=0; i< bitmaps.size();i++)
+        {
+            System.out.println(i);
+        }
+    }
+
+
+
+
+}
+

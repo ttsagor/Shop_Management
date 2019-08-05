@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rezaandreza.shop">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.Customer.CustomerTransactionHistoryDetails"></activity>
+        <activity android:name=".Activities.Customer.CustomerTransactionHistory" />
+        <activity android:name=".Activities.Customer.CustomerDetailsInformation" />
+        <activity android:name=".Activities.Customer.CustomerList" />
+        <activity android:name=".Activities.Customer.AddCustomer" />
+        <activity android:name=".Activities.Sale.POSPriceWise.POSPriceWise" />
+        <activity
+            android:name=".Activities.Dashboard.DashboardDrawer"
+            android:label="@string/title_activity_dashboard_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Registration.PinGenerate.PinGenerate" />
+        <activity android:name=".Activities.Registration.Registration" />
+        <activity android:name=".Activities.Registration.NumberVerification.NumberVerification" />
+        <activity
+            android:name=".MainActivity"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".System.Service.FirebaseMessageReceiver">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Activities.Registration.Signup.Signup" />
+        <activity android:name=".Activities.Dashboard.Dashboard" />
+        <activity
+            android:name=".Activities.Sale.POS.POS"
+            android:noHistory="true"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activities.Sale.SaleReport.SalesList" />
+        <activity
+            android:name=".Activities.Sale.SaleReport.SalesDetials"
+            android:noHistory="true" />
+    </application>
+
+</manifest>

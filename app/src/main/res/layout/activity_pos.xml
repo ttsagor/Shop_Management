@@ -246,7 +246,7 @@
                                 android:text="৭"
                                 android:id="@+id/btn_7"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -260,7 +260,7 @@
                                 android:text="৮"
                                 android:id="@+id/btn_8"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -274,7 +274,7 @@
                                 android:text="৯"
                                 android:id="@+id/btn_9"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -312,7 +312,7 @@
                                 android:text="৪"
                                 android:id="@+id/btn_4"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -326,7 +326,7 @@
                                 android:text="৫"
                                 android:id="@+id/btn_5"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -340,7 +340,7 @@
                                 android:text="৬"
                                 android:id="@+id/btn_6"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -354,7 +354,7 @@
                                 android:text="C"
                                 android:id="@+id/btn_c"
                                 android:background="@color/red_background"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#fff"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -380,7 +380,7 @@
                                 android:text="১"
                                 android:id="@+id/btn_1"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -394,7 +394,7 @@
                                 android:text="২"
                                 android:id="@+id/btn_2"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -408,7 +408,7 @@
                                 android:text="৩"
                                 android:id="@+id/btn_3"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -422,7 +422,7 @@
                                 android:text="X"
                                 android:id="@+id/btn_multi"
                                 android:background="#003a99"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#fff"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -448,7 +448,7 @@
                                 android:text="০"
                                 android:id="@+id/btn_0"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -462,7 +462,7 @@
                                 android:text="০০"
                                 android:id="@+id/btn_00"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -476,7 +476,7 @@
                                 android:text="."
                                 android:id="@+id/btn_dot"
                                 android:background="#EEEEEE"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#000000"/>
                         </LinearLayout>
                         <LinearLayout
@@ -490,7 +490,7 @@
                                 android:text="+"
                                 android:id="@+id/btn_add"
                                 android:background="#12584D"
-                                android:textSize="30dp"
+                                android:textSize="50dp"
                                 android:textColor="#fff"/>
                         </LinearLayout>
                     </LinearLayout>

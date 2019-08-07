@@ -6,46 +6,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:id="@+id/layout_holder">
+        android:id="@+id/root_view">
        <LinearLayout
            android:layout_width="0dp"
            android:layout_height="wrap_content"
-           android:layout_weight=".3"
+           android:layout_weight=".2"
            android:gravity="center">
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:id="@+id/customer_name"/>
+               android:id="@+id/total_quatity"
+               android:textColor="@color/colorPrimary"
+               />
        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".2"
+            android:layout_weight=".4"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/total_quatity"/>
+                android:id="@+id/customer_name"
+                android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:gravity="center">
+            android:layout_weight=".4"
+            android:gravity="center"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/total_amount"/>
+                android:id="@+id/total_amount"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sale_datetime"
+                android:textColor="#000000"/>
         </LinearLayout>
-        <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sale_category"/>
-    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.rezaandreza.shop.Model.Database;
 
+import com.rezaandreza.shop.Helper.Debug;
 import com.rezaandreza.shop.System.Helper.TypeCasting;
 import com.rezaandreza.shop.System.Model.Database.BaseModel;
 
@@ -32,8 +33,17 @@ public class CustomerActivity  extends BaseModel {
             ca.note = invoice.note;
 
             Customer customer = new Customer();
-            customer = (Customer) customer.selectCon("customer_name='"+ca.customer_name+"'").get(0);
-            customer.current_balance = customer.current_balance - ca.due_amount + ca.advance_amount;
+            customer = (Customer) customer.selectCon("upper(customer_name)='"+ca.customer_name.toUpperCase()+"'").get(0);
+            if(ca.advance_amount>0.00)
+            {
+                customer.current_balance = customer.current_balance + ca.advance_amount;
+            }
+            else
+            {
+                customer.current_balance = customer.current_balance - ca.due_amount;
+            }
+
+            Debug.print(customer);
             customer.insert();
             ca.insert();
         }

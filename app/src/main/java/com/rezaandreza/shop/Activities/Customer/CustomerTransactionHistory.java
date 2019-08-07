@@ -46,7 +46,7 @@ public class CustomerTransactionHistory extends AppCompatActivity {
         ListView transaction_history = getView("transaction_history");
         final ArrayList<SalesInvoice> AllCustomer = new ArrayList<>();
 
-        for(Object o : (new SalesInvoice()).selectCon("customer_name='"+c.customer_name+"'"))
+        for(Object o : (new SalesInvoice()).selectCon("upper(customer_name)='"+c.customer_name.trim().toUpperCase()+"'"))
         {
             AllCustomer.add((SalesInvoice) o);
         }

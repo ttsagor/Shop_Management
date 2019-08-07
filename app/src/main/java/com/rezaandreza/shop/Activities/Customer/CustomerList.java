@@ -101,13 +101,16 @@ public class CustomerList extends AppCompatActivity {
 
         if(a.current_balance < 0.00)
         {
+
            TextView tx = getView("current_balance",data.view);
            tx.setTextColor(Color.RED);
+           tx.setText("বাকিঃ "+NumberEngToBng(String.valueOf(a.current_balance*-1)));
         }
         else if(a.current_balance > 0.00)
         {
             TextView tx = getView("current_balance",data.view);
-            tx.setTextColor(Color.GREEN);
+            tx.setTextColor(Color.parseColor("#12584D"));
+            tx.setText("অগ্রিমঃ "+NumberEngToBng(String.valueOf(a.current_balance)));
         }
         else
         {

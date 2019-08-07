@@ -308,7 +308,7 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="হিসাব"
+                            android:text="বিক্রয় তালিকা"
                             android:textColor="#12584D"
                             android:background="@color/transparent"
                             android:id="@+id/footer_accounting"/>

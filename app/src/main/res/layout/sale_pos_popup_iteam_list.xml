@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="ss"
                 android:id="@+id/iteam_name_bng"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="#525252"/>

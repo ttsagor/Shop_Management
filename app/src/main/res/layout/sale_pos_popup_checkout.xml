@@ -147,6 +147,7 @@
                                     android:textAlignment="center"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                                     android:textColor="@color/colorPrimary">
+                                    <requestFocus />
                                 </EditText>
                             </LinearLayout>
                         </LinearLayout>

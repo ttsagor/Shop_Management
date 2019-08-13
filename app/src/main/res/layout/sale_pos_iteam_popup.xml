@@ -108,28 +108,28 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".23"
+                                android:layout_weight=".4"
                                 android:gravity="center">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="পদের নাম"
+                                    android:text="পণ্যের নাম"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                                     android:textColor="@color/red_background"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".29"
+                                android:layout_weight=".3"
                                 android:gravity="center">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="পদের পরিমান"
+                                    android:text="পণ্যের পরিমান"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                                     android:textColor="@color/red_background"/>
                             </LinearLayout>
-                            <LinearLayout
+                            <!--<LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".24"
@@ -140,11 +140,11 @@
                                     android:text="পদের মূল্য"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                                     android:textColor="@color/red_background"/>
-                            </LinearLayout>
+                            </LinearLayout>-->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".24"
+                                android:layout_weight=".3"
                                 android:gravity="center">
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -171,7 +171,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:id="@+id/price_amount_holder">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -243,21 +244,21 @@
                                     android:gravity="bottom"/>
                             </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="15dp">
+                        <Button
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center"
-                            android:padding="15dp">
-                            <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="সাবমিট করুন"
-                                android:background="#12584D"
-                                android:textColor="#ffffff"
-                                android:textSize="25dp"
-                                android:id="@+id/btn_submit"/>
-                        </LinearLayout>
+                            android:text="সাবমিট করুন"
+                            android:background="#12584D"
+                            android:textColor="#ffffff"
+                            android:textSize="25dp"
+                            android:id="@+id/btn_submit"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

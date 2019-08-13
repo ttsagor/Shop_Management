@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -388,7 +389,10 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             else if (finalSaleInvoice.total_amount > TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
                 due.setVisibility(View.GONE);
-                getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given)-finalSaleInvoice.total_amount))), data);
+                TextView tt = getView("due_advance", data);
+                tt.setSingleLine(false);
+                tt.setText("ক্রেতার নাম\nসিলেক্ট করুন");
+               // getView("due_advance", "ক্রেতার নাম সিলেক্ট করুন", data);
                 getView("due_advance_txt", "ফেরত", data);
                 setColorView(data, "due_advance_txt", "#FF0000");
                 setColorView(data, "due_advance", "#FF0000");
@@ -470,8 +474,8 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
     public void finalSubmitView(final PopupViewData data)
     {
         final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
-       // final ListView customer_list = (ListView) data.popupView.findViewById(R.id.customer_list);
         setFontFromView(getView("root_view",data.popupView));
+
         close_tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -480,8 +484,23 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         });
 
         setView(finalSaleInvoice,data.popupView);
-        ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added",data.popupView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShowFinal", 0, AlliteamList.size(),true,data.popupView);
-
+        if(finalSaleInvoice.customer_name.equals(""))
+        {
+            TextView customer_name_txt = getView("customer_name_txt",data.popupView);
+            customer_name_txt.setVisibility(View.GONE);
+        }
+        ListView iteam_added = (ListView) getView("iteam_added", data.popupView);
+        if(iteamList.size()>0) {
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) iteam_added.getLayoutParams();
+            lp.height = 100*iteamList.size();
+            iteam_added.setLayoutParams(lp);
+            ScrollListView.loadListView(Season.applicationContext, iteam_added, R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShowFinal", 0, AlliteamList.size(), true, data.popupView);
+        }
+        else
+        {
+            LinearLayout list_holder = (LinearLayout) getView("list_holder", data.popupView);
+            list_holder.setVisibility(View.GONE);
+        }
         Button submit_btn = getView("submit_btn",data.popupView);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -494,20 +513,15 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                 finish();
             }
         });
-
-
-        //finalSaleInvoice.insert();
-        //finalSaleInvoice.invoice_id = finalSaleInvoice.max("invoice_id","");
-        //invoiceToActivity(finalSaleInvoice);
-        //data.popupWindow.dismiss();
-        //Toast.makeText(Season.applicationContext, "Sale Successful", Toast.LENGTH_SHORT).show();
-        //finish();
     }
+    View checkoutView;
     public void getPopupdataCustomer(final PopupViewData data)
     {
+        checkoutView = data.popupView;
         final ArrayList<Customer> newIteam = new ArrayList<>();
         final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
         final ListView customer_list = (ListView) data.popupView.findViewById(R.id.customer_list);
+        final LinearLayout price_amount_holder = (LinearLayout) data.popupView.findViewById(R.id.price_amount_holder);
         setFontFromView(getView("root_view",data.popupView));
         Button submit_btn = getView("submit_btn",data.popupView);
         final EditText customer_name = getView("customer_name",data.popupView);
@@ -683,7 +697,16 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
 
 
         ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
-        customer_name.addTextChangedListener(new TextWatcher() {
+
+        customer_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    MyPopupView.showPopupView(R.layout.sale_pos_popup_checkout_customer_name,"popupCustomerSelect",data.popupView);
+                }
+            }
+        });
+        /*customer_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {}
             @Override
@@ -713,9 +736,49 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                     //ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
                 }
             }
-        });
+        });*/
     }
+    public void  popupCustomerSelect(final PopupViewData data)
+    {
+        customer_list_popupWindow = data.popupWindow;
+        LinearLayout root_view = data.popupView.findViewById(R.id.root_view);
+        final ListView customer_list = data.popupView.findViewById(R.id.customer_list);
+        EditText customer_name = data.popupView.findViewById(R.id.customer_name);
+        setFontFromView(getView("root_view",data.popupView));
+        final ArrayList<Customer> newIteam = new ArrayList<>();
 
+        customer_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+
+                if(s.length() != 0)
+                {
+                    newIteam.clear();
+                    for(Customer i : AllCustomer)
+                    {
+                        if((i.customer_name!=null && i.customer_name.contains(s)) || (i.customer_phone!=null && i.customer_phone.contains(s)))
+                        {
+                            newIteam.add(i);
+                        }
+                    }
+                    ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, newIteam, "customerList", 0, newIteam.size(),true,data.popupView);
+                }
+                else
+                {
+                    calculateCheckoutViewUpdate(data.popupView);
+                    //ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
+                }
+            }
+        });
+        ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
+    }
+    PopupWindow customer_list_popupWindow;
     public void customerList(final ViewData data)
     {
        setFontFromView(getView("root_view",data.view));
@@ -732,10 +795,14 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
        root_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText customer_name = getView("customer_name",data.parentView);
+                EditText customer_name = getView("customer_name",checkoutView);
+                EditText note_given = getView("note_given",checkoutView);
+                note_given.requestFocus();
                 customer_name.setText(((Customer) data.object).customer_name);
-                ((ListView) getView("customer_list",data.parentView)).setVisibility(View.GONE);
-                calculateCheckoutViewUpdate(data.parentView);
+
+                //((ListView) getView("customer_list",data.parentView)).setVisibility(View.GONE);
+                calculateCheckoutViewUpdate(checkoutView);
+                customer_list_popupWindow.dismiss();
             }
         });
     }
@@ -751,7 +818,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                 data.popupWindow.dismiss();
             }
         });
-        ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.popupView);
+        ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.popupView);
     }
     public void productListQuantityShowFinal(final ViewData data)
     {
@@ -776,6 +843,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
     public void productListQuantityShow(final ViewData data)
     {
         LinearLayout root_view = data.view.findViewById(R.id.root_view);
+
         if(data.position%2==0)
         {
             root_view.setBackgroundColor(Color.parseColor("#e6e6e6"));
@@ -796,8 +864,8 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             public void onClick(View v) {
                 iteamList.remove(data.position);
                 ListView iteam_list = getView("iteam_added",data.parentView);
-                ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_popup_iteam_list, new ArrayList<>(), "productListShow", 0, AlliteamList.size(),true,data.parentView);
+                ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
+                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_pop_iteam_list_price_wise, new ArrayList<>(), "productListShow", 0, AlliteamList.size(),true,data.parentView);
                 ListView l = (ListView) getView("iteam_list",data.parentView);
                 l.getLayoutParams().height=0;
                 calculateUpdateQuantityPrice(data.parentView);
@@ -820,7 +888,8 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         //final EditText iteam_unit = (EditText) data.popupView.findViewById(R.id.iteam_unit);
 
         //final TextView iteam_list_name = (TextView) data.popupView.findViewById(R.id.iteam_list_name);
-
+        final LinearLayout price_amount_holder = (LinearLayout) data.popupView.findViewById(R.id.price_amount_holder);
+        price_amount_holder.setVisibility(View.GONE);
         setFontFromView(getView("root_view",data.popupView));
 
 
@@ -854,13 +923,13 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                         }
                     }
                     iteam_list.getLayoutParams().height = 1000;
-                    ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_list, newIteam, "productListShow", 0, AlliteamList.size(),true,data.popupView);
+                    ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_pop_iteam_list_price_wise, newIteam, "productListShow", 0, AlliteamList.size(),true,data.popupView);
                 }
                 else
                 {
                     newIteam.clear();
                     iteam_list.getLayoutParams().height = 0;
-                    ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_list, newIteam, "productListShow", 0, AlliteamList.size(),true,data.popupView);
+                    ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_pop_iteam_list_price_wise, newIteam, "productListShow", 0, AlliteamList.size(),true,data.popupView);
                 }
             }
         });
@@ -909,7 +978,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         getView("iteam_list_name",output,data.popupView);*/
         calculateUpdateQuantityPrice(data.popupView);
         //ScrollListView.loadListView(Season.applicationContext, iteam_list, R.layout.sale_pos_popup_iteam_list, AlliteamList, "productListShow", 0, AlliteamList.size(),true,data.popupView);
-        ScrollListView.loadListView(Season.applicationContext, iteam_added, R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.popupView);
+        ScrollListView.loadListView(Season.applicationContext, iteam_added, R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.popupView);
     }
     public void calculateUpdateQuantityPrice(View v)
     {
@@ -928,7 +997,13 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         CheckBox c = getView("with_price",data.parentView);
         Button submit_btn = getView("submit_btn",data.popupView);
 
-        if(selectedIteamPriceQuantity.iteam_quantity.equals(""))
+        LinearLayout ll = getView("price_holder",data.popupView);
+        ll.setVisibility(View.GONE);
+
+        ll = getView("quantity_holder",data.popupView);
+        ll.setVisibility(View.VISIBLE);
+
+        /*if(selectedIteamPriceQuantity.iteam_quantity.equals(""))
         {
             LinearLayout ll = getView("quantity_holder",data.popupView);
             ll.setVisibility(View.VISIBLE);
@@ -946,7 +1021,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         {
             LinearLayout ll = getView("price_holder",data.popupView);
             ll.setVisibility(View.VISIBLE);
-        }
+        }*/
         setView(selectedIteamPriceQuantity,data.popupView);
         setFontFromView(getView("root_view",data.popupView));
         final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
@@ -986,8 +1061,8 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                 data.popupWindow.dismiss();
                 ListView l = (ListView) getView("iteam_list",data.parentView);
                 l.getLayoutParams().height=0;
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_popup_iteam_list, AlliteamList, "productListShow", 0, AlliteamList.size(),true,data.parentView);
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
+                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_pop_iteam_list_price_wise, AlliteamList, "productListShow", 0, AlliteamList.size(),true,data.parentView);
+                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
                 calculateUpdateQuantityPrice(data.parentView);
 
             }
@@ -1003,6 +1078,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         String[] quantities = i.iteam_popular_quantity.split(",");
         final LinearLayout ll = data.view.findViewById(R.id.quantity_container);
         final LinearLayout root_view_iteam = data.view.findViewById(R.id.root_view_iteam);
+        final LinearLayout txt_layout = data.view.findViewById(R.id.txt_layout);
         ll.removeAllViews();
         if(data.position%2==0)
         {
@@ -1021,7 +1097,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             i.iteam_quantity ="0";
         }
 
-        final Button btn = new Button(data.context);
+        /*final Button btn = new Button(data.context);
         if(!i.iteam_quantity.equals("0") && !Arrays.asList(quantities).contains(i.iteam_quantity))
         {
             btn.setText("ইনপুট("+i.iteam_quantity+")");
@@ -1037,14 +1113,38 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
 
         btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        ll.addView(btn);
-        btn.setOnClickListener(new View.OnClickListener()
+        ll.addView(btn);*/
+        txt_layout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                selectedIteamPriceQuantity = i;
-                selectedIteamPriceQuantity.iteam_quantity="";
-                MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
+                CheckBox c = getView("with_price",data.parentView);
+                if(!c.isChecked())
+                {
+                    if(iteamList.contains(i))
+                    {
+                        int p = iteamList.indexOf(i);
+                        i.iteam_quantity = "0";
+                        iteamList.set(p,i);
+
+                    }
+                    else
+                    {
+                        i.iteam_quantity = "0";
+                        iteamList.add(i);
+                    }
+                    calculateUpdateQuantityPrice(data.parentView);
+                    ((EditText) getView("iteam_name",data.parentView)).setText("");
+                    ScrollListView.loadListView(Season.applicationContext,(ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
+
+                }
+                else
+                {
+                    selectedIteamPriceQuantity = i;
+                    selectedIteamPriceQuantity.iteam_quantity="";
+                    MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
+                }
+
             }
         });
 
@@ -1075,13 +1175,13 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                 public void onClick(View v) {
                     if(iteamList.contains(i))
                     {
-                        if(c.isChecked())
+                        /*if(c.isChecked())
                         {
                             selectedIteamPriceQuantity = i;
                             selectedIteamPriceQuantity.iteam_quantity = quantity;
                             MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
                         }
-                        else
+                        else*/
                         {
                             int p = iteamList.indexOf(i);
                             i.iteam_quantity = quantity;
@@ -1091,13 +1191,13 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                     }
                     else
                     {
-                        if(c.isChecked())
+                        /*if(c.isChecked())
                         {
                             selectedIteamPriceQuantity = i;
                             selectedIteamPriceQuantity.iteam_quantity = quantity;
                             MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
                         }
-                        else
+                        else*/
                         {
                             i.iteam_quantity = quantity;
                             iteamList.add(i);
@@ -1115,10 +1215,10 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                     }
                     btn1.setBackgroundResource(R.drawable.pos_quantity_btn_selected);
                     btn1.setTextColor(Color.parseColor("#2982a3"));
-                    btn.setText("ইনপুট");
+                    //btn.setText("ইনপুট");
                     calculateUpdateQuantityPrice(data.parentView);
                     ((EditText) getView("iteam_name",data.parentView)).setText("");
-                    ScrollListView.loadListView(Season.applicationContext,(ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
+                    ScrollListView.loadListView(Season.applicationContext,(ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
                 }
             });
         }

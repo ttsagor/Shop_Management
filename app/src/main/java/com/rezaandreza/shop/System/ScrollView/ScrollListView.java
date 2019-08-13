@@ -108,11 +108,18 @@ public class ScrollListView {
     {
         loadListView(context,lv,layout,ojects,rowMethod,0,ojects.size(),true,true,false,null);
     }
+    public static void loadListViewUpdateHeight(final Context context,final  ListView lv,final int layout,final ArrayList<?> ojects,final String rowMethod,final int firstCountToShow,final int setByStep,Boolean showFooter,View view)
+    {
+        loadListView(context,lv,layout,ojects,rowMethod,0,ojects.size(),true,true,false,view);
+    }
     public static void loadListViewUpdateHeightSpecial(final Context context,final  ListView lv,final int layout,final ArrayList<?> ojects,final String rowMethod,final int firstCountToShow,final int setByStep,Boolean showFooter)
     {
         loadListView(context,lv,layout,ojects,rowMethod,0,ojects.size(),true,true,true,null);
     }
-
+    public static void loadListViewUpdateHeightSpecial(final Context context,final  ListView lv,final int layout,final ArrayList<?> ojects,final String rowMethod,final int firstCountToShow,final int setByStep,Boolean showFooter,View view)
+    {
+        loadListView(context,lv,layout,ojects,rowMethod,0,ojects.size(),true,true,true,view);
+    }
     public static void updateListViewHeightManual(Context context,ListView listView,int id, int iteamCount) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter != null) {

@@ -1223,7 +1223,16 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             });
         }
         setFontFromView(getView("quantity_container",data.view));
-
+        final CheckBox c = getView("with_price",data.parentView);
+        final LinearLayout quantity_container = getView("quantity_container",data.view);
+        if(!c.isChecked())
+        {
+            quantity_container.setVisibility(View.GONE);
+        }
+        else
+        {
+            quantity_container.setVisibility(View.VISIBLE);
+        }
     }
 
     public void calculateQuantityAmount(String txt)

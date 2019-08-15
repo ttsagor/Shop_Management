@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -240,6 +241,7 @@ public class POSPriceWise extends AppCompatActivity{
         String[] quantities = i.iteam_popular_quantity.split(",");
         final LinearLayout ll = data.view.findViewById(R.id.quantity_container);
         final LinearLayout root_view_iteam = data.view.findViewById(R.id.root_view_iteam);
+        final LinearLayout txt_layout = data.view.findViewById(R.id.txt_layout);
         ll.removeAllViews();
         if(data.position%2==0)
         {
@@ -257,8 +259,17 @@ public class POSPriceWise extends AppCompatActivity{
         {
             i.iteam_quantity ="0";
         }
+        txt_layout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                selectedIteamPriceQuantity = i;
+                selectedIteamPriceQuantity.iteam_quantity="";
+                MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
 
-        final Button btn = new Button(data.context);
+            }
+        });
+        /*final Button btn = new Button(data.context);
         if(!i.iteam_quantity.equals("0") && !Arrays.asList(quantities).contains(i.iteam_quantity))
         {
             btn.setText("ইনপুট("+i.iteam_quantity+")");
@@ -283,7 +294,7 @@ public class POSPriceWise extends AppCompatActivity{
                 selectedIteamPriceQuantity.iteam_quantity="";
                 MyPopupView.showPopupView(R.layout.sale_pos_popup_popup_price_quantity,"priceQuantityPopup",data.parentView);
             }
-        });
+        });*/
 
 
         for (final String quantity :quantities)
@@ -352,7 +363,7 @@ public class POSPriceWise extends AppCompatActivity{
                     }
                     btn1.setBackgroundResource(R.drawable.pos_quantity_btn_selected);
                     btn1.setTextColor(Color.parseColor("#2982a3"));
-                    btn.setText("ইনপুট");
+                    //btn.setText("ইনপুট");
                     calculateUpdateQuantityPrice(data.parentView);
                     ((EditText) getView("iteam_name",data.parentView)).setText("");
                     ScrollListView.loadListView(Season.applicationContext,(ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
@@ -360,76 +371,93 @@ public class POSPriceWise extends AppCompatActivity{
             });
         }
         setFontFromView(getView("quantity_container",data.view));
+        final CheckBox c = getView("with_price",data.parentView);
+        final LinearLayout quantity_container = getView("quantity_container",data.view);
+        if(!c.isChecked())
+        {
+            quantity_container.setVisibility(View.GONE);
+        }
+        else
+        {
+            quantity_container.setVisibility(View.VISIBLE);
+        }
 
     }
     public void priceQuantityPopup(final PopupViewData data)
     {
-        CheckBox c = getView("with_price",data.parentView);
-        Button submit_btn = getView("submit_btn",data.popupView);
+        try {
+            CheckBox c = getView("with_price",data.parentView);
+            Button submit_btn = getView("submit_btn",data.popupView);
 
-        /*if(selectedIteamPriceQuantity.iteam_quantity.equals(""))
-        {
-            LinearLayout ll = getView("quantity_holder",data.popupView);
-            ll.setVisibility(View.VISIBLE);
-        }
-        else {
-            LinearLayout ll = getView("quantity_holder",data.popupView);
-            ll.setVisibility(View.GONE);
-        }*/
-        if(!c.isChecked())
-        {
-            LinearLayout ll = getView("quantity_holder",data.popupView);
-            ll.setVisibility(View.GONE);
-        }
-        else
-        {
-            LinearLayout ll = getView("quantity_holder",data.popupView);
-            ll.setVisibility(View.VISIBLE);
-        }
-        setView(selectedIteamPriceQuantity,data.popupView);
-        setFontFromView(getView("root_view",data.popupView));
-        final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
-        close_tab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                data.popupWindow.dismiss();
+            /*if(selectedIteamPriceQuantity.iteam_quantity.equals(""))
+            {
+                LinearLayout ll = getView("quantity_holder",data.popupView);
+                ll.setVisibility(View.VISIBLE);
             }
-        });
-        final EditText yourEditText= (EditText) data.popupView.findViewById(R.id.iteam_quantity);
-        EdittextHelper.setFocus((EditText) getView("iteam_quantity",data.popupView));
-        yourEditText.requestFocus();
-        submit_btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-
-                hideKeyboard();
-                Iteam n =(Iteam) getViewData(new Iteam(),data.popupView);
-                Iteam i = selectedIteamPriceQuantity;
-                selectedIteamPriceQuantity.iteam_price =n.iteam_price;
-                selectedIteamPriceQuantity.iteam_quantity=n.iteam_quantity;
-
-                if(!(n.iteam_quantity.equals("") || n.iteam_quantity.equals("0")))
-                {
-                    if(iteamList.contains(i))
-                    {
-                        int p = iteamList.indexOf(i);
-                        iteamList.set(p,selectedIteamPriceQuantity);
-                    }
-                    else
-                    {
-                        iteamList.add(selectedIteamPriceQuantity);
-                    }
+            else {
+                LinearLayout ll = getView("quantity_holder",data.popupView);
+                ll.setVisibility(View.GONE);
+            }*/
+            if(!c.isChecked())
+            {
+                LinearLayout ll = getView("quantity_holder",data.popupView);
+                ll.setVisibility(View.GONE);
+            }
+            else
+            {
+                LinearLayout ll = getView("quantity_holder",data.popupView);
+                ll.setVisibility(View.VISIBLE);
+            }
+            setView(selectedIteamPriceQuantity,data.popupView);
+            setFontFromView(getView("root_view",data.popupView));
+            final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
+            close_tab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    data.popupWindow.dismiss();
                 }
-                ListView l = (ListView) getView("iteam_list",data.parentView);
-                l.getLayoutParams().height=0;
-                data.popupWindow.dismiss();
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_popup_iteam_list, AlliteamList, "productListShow", 0, AlliteamList.size(),true,data.parentView);
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
-                calculateUpdateQuantityPrice(data.parentView);
+            });
+            final EditText yourEditText= (EditText) data.popupView.findViewById(R.id.iteam_price);
+            EdittextHelper.setFocus((EditText) getView("iteam_price",data.popupView));
+            yourEditText.requestFocus();
+            submit_btn.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+                        hideKeyboard();
+                        Iteam n = (Iteam) getViewData(new Iteam(), data.popupView);
+                        Iteam i = selectedIteamPriceQuantity;
+                        selectedIteamPriceQuantity.iteam_price = n.iteam_price;
+                        selectedIteamPriceQuantity.iteam_quantity = n.iteam_quantity;
 
-            }
-        });
+                        if (!(n.iteam_quantity.equals("") || n.iteam_quantity.equals("0"))) {
+                            if (iteamList.contains(i)) {
+                                int p = iteamList.indexOf(i);
+                                iteamList.set(p, selectedIteamPriceQuantity);
+                            } else {
+                                iteamList.add(selectedIteamPriceQuantity);
+                            }
+                        }
+                        else {
+                            selectedIteamPriceQuantity.iteam_quantity = "0";
+                            if (iteamList.contains(i)) {
+                                int p = iteamList.indexOf(i);
+                                iteamList.set(p, selectedIteamPriceQuantity);
+                            } else {
+                                iteamList.add(selectedIteamPriceQuantity);
+                            }
+                        }
+                        ListView l = (ListView) getView("iteam_list", data.parentView);
+                        l.getLayoutParams().height = 0;
+                        ((EditText) getView("iteam_name",data.parentView)).setText("");
+                        data.popupWindow.dismiss();
+                        ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list", data.parentView), R.layout.sale_pos_popup_iteam_list, AlliteamList, "productListShow", 0, AlliteamList.size(), true, data.parentView);
+                        ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added", data.parentView), R.layout.sale_pos_popup_iteam_quantity_list, iteamList, "productListQuantityShow", 0, AlliteamList.size(), true, data.parentView);
+                        calculateUpdateQuantityPrice(data.parentView);
+                }
+            });
+        }
+        catch (Exception e){System.out.println("hereee"+e.getMessage());}
 
     }
     public void calculateUpdateQuantityPrice(View v)
@@ -586,8 +614,10 @@ public class POSPriceWise extends AppCompatActivity{
 
         remove_btn.setVisibility(View.GONE);
     }
+    View checkoutView;
     public void getPopupdataCustomer(final PopupViewData data)
     {
+        checkoutView = data.popupView;
         final ArrayList<Customer> newIteam = new ArrayList<>();
         final ImageView close_tab = (ImageView) data.popupView.findViewById(R.id.close_tab);
         final ListView customer_list = (ListView) data.popupView.findViewById(R.id.customer_list);
@@ -743,7 +773,7 @@ public class POSPriceWise extends AppCompatActivity{
 
 
         ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
-        customer_name.addTextChangedListener(new TextWatcher() {
+        /*customer_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {}
             @Override
@@ -773,9 +803,57 @@ public class POSPriceWise extends AppCompatActivity{
                     //ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
                 }
             }
+        });*/
+        customer_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    MyPopupView.showPopupView(R.layout.sale_pos_popup_checkout_customer_name,"popupCustomerSelect",data.popupView);
+                }
+            }
         });
     }
+    PopupWindow customer_list_popupWindow;
+    public void  popupCustomerSelect(final PopupViewData data)
+    {
+        customer_list_popupWindow = data.popupWindow;
+        LinearLayout root_view = data.popupView.findViewById(R.id.root_view);
+        final ListView customer_list = data.popupView.findViewById(R.id.customer_list);
+        EditText customer_name = data.popupView.findViewById(R.id.customer_name);
+        setFontFromView(getView("root_view",data.popupView));
+        final ArrayList<Customer> newIteam = new ArrayList<>();
 
+        customer_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+
+                if(s.length() != 0)
+                {
+                    newIteam.clear();
+                    for(Customer i : AllCustomer)
+                    {
+                        if((i.customer_name!=null && i.customer_name.contains(s)) || (i.customer_phone!=null && i.customer_phone.contains(s)))
+                        {
+                            newIteam.add(i);
+                        }
+                    }
+                    ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, newIteam, "customerList", 0, newIteam.size(),true,data.popupView);
+                }
+                else
+                {
+                    calculateCheckoutViewUpdate(data.popupView);
+                    //ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
+                }
+            }
+        });
+        ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
+    }
     public void calculateCheckoutViewUpdate(View data)
     {
         //final EditText note_given = getView("note_given",data);
@@ -866,10 +944,13 @@ public class POSPriceWise extends AppCompatActivity{
         root_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText customer_name = getView("customer_name",data.parentView);
+                EditText customer_name = getView("customer_name",checkoutView);
+                EditText note_given = getView("note_given",checkoutView);
+                note_given.requestFocus();
                 customer_name.setText(((Customer) data.object).customer_name);
-                ((ListView) getView("customer_list",data.parentView)).setVisibility(View.GONE);
-                calculateCheckoutViewUpdate(data.parentView);
+
+                calculateCheckoutViewUpdate(checkoutView);
+                customer_list_popupWindow.dismiss();
             }
         });
     }

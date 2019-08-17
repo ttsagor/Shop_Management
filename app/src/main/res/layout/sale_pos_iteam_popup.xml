@@ -10,13 +10,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha=".7"
-            android:background="#adccff"/>
+            android:background="#f3f3f3"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="1"
-            android:background="@drawable/border_ccc"
-            android:padding="1dp">
+            android:padding="1dp"
+            android:background="#f3f3f3">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -51,9 +51,10 @@
                                     android:orientation="horizontal"
                                     android:weightSum="1">
                                     <LinearLayout
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/edittext_border_shadow">
+                                        android:background="@drawable/edittext_border_shadow"
+                                        android:layout_weight=".9">
                                         <EditText
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
@@ -62,7 +63,19 @@
                                             android:id="@+id/iteam_name"
                                             android:background="@null"
                                             android:padding="5dp"
-                                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+                                            android:lines="1"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".1"
+                                        android:gravity="center">
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@android:drawable/ic_menu_add"
+                                            android:scaleType="centerInside"/>
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -115,7 +128,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="পণ্যের নাম"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textColor="@color/red_background"/>
+                                    android:textColor="#000"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -127,7 +140,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="পণ্যের পরিমান"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textColor="@color/red_background"/>
+                                    android:textColor="#000"/>
                             </LinearLayout>
                             <!--<LinearLayout
                                 android:layout_width="0dp"
@@ -151,7 +164,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="বাদ দিন"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                    android:textColor="@color/red_background"/>
+                                    android:textColor="#000"/>
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
@@ -159,16 +172,17 @@
                             android:layout_height="wrap_content">
                             <ListView
                                 android:layout_width="match_parent"
-                                android:layout_height="400dp"
+                                android:layout_height="490dp"
                                 android:id="@+id/iteam_added"
-                                android:footerDividersEnabled="false">
+                                android:footerDividersEnabled="false"
+                                android:fadeScrollbars="false">
 
                             </ListView>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:orientation="vertical"

@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                android:layout_weight=".35">
+                android:layout_weight=".4">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,24 +155,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight=".5"
-                            android:gravity="center"
-                            android:paddingLeft="15dp">
-                            <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="পণ্যের তালিকা"
-                                android:background="#00A9F2"
-                                android:textColor="#ffffff"
-                                android:textSize="25dp"
-                                android:id="@+id/btn_iteam_list"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".5"
                             android:orientation="horizontal"
                             android:gravity="left"
                             android:padding="2dp">
@@ -191,16 +175,40 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center"
-                        android:padding="15dp">
-                        <Button
-                            android:layout_width="match_parent"
+                        android:gravity="center|bottom"
+                        android:padding="15dp"
+                        android:weightSum="1">
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="বিক্রয়"
-                            android:background="@drawable/btn_border_primany"
-                            android:textColor="#ffffff"
-                            android:textSize="25dp"
-                            android:id="@+id/btn_cash"/>
+                            android:layout_weight=".5"
+                            android:gravity="center"
+                            android:paddingLeft="10dp">
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="পণ্যের তালিকা"
+                                android:background="@drawable/btn_border_primany_blue"
+                                android:textColor="#ffffff"
+                                android:textSize="25dp"
+                                android:id="@+id/btn_iteam_list"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:gravity="center"
+                            android:paddingLeft="10dp">
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="বিক্রয়"
+                                android:background="@drawable/btn_border_primany"
+                                android:textColor="#ffffff"
+                                android:textSize="25dp"
+                                android:id="@+id/btn_cash"/>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -208,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                android:layout_weight=".55"
+                android:layout_weight=".5"
                 android:gravity="bottom">
                 <LinearLayout
                     android:layout_width="match_parent"

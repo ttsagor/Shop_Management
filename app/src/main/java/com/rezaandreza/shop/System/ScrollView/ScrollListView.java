@@ -29,7 +29,7 @@ public class ScrollListView {
         final View footer = ((Activity) context).getLayoutInflater().inflate(R.layout.progessbar, null);
         final ProgressBar progressBar = (ProgressBar) footer.findViewById(R.id.progressBar);
 
-        if(lv.getFooterViewsCount()==0 || showFooter) {
+        if(showFooter) {
             lv.addFooterView(footer);
         }
 

@@ -134,6 +134,8 @@
                                                             android:id="@+id/iteam_name"
                                                             android:background="@null"
                                                             android:padding="5dp"
+                                                            android:maxLines="1"
+                                                            android:inputType="text"
                                                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
                                                     </LinearLayout>
                                                 </LinearLayout>

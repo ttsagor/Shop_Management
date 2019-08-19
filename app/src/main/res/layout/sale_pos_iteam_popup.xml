@@ -63,7 +63,8 @@
                                             android:id="@+id/iteam_name"
                                             android:background="@null"
                                             android:padding="5dp"
-                                            android:lines="1"
+                                            android:maxLines="1"
+                                            android:inputType="text"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                                     </LinearLayout>
                                     <LinearLayout

@@ -504,6 +504,14 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             list_holder.setVisibility(View.GONE);
         }
         Button submit_btn = getView("submit_btn",data.popupView);
+        if(finalSaleInvoice.advance_amount.equals("0"))
+        {
+            getView("advance_amount","-",data.popupView);
+        }
+        getView("total_quatity",NumberEngToBng(finalSaleInvoice.total_quatity),data.popupView);
+        getView("total_amount",NumberEngToBng(finalSaleInvoice.total_amount),data.popupView);
+        getView("note_given",NumberEngToBng(finalSaleInvoice.note_given),data.popupView);
+
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -835,8 +843,19 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         }
         Iteam i = (Iteam) data.object;
         setView(data.object,data.view);
-        getView("iteam_quantity",NumberEngToBng(i.iteam_quantity)+" "+i.iteam_unit,data.view);
-        getView("iteam_price",NumberEngToBng(i.iteam_price)+" টাকা",data.view);
+        if(i.iteam_quantity.equals("0")){
+            getView("iteam_quantity","-",data.view);
+        }
+        else {
+            getView("iteam_quantity",NumberEngToBng(i.iteam_quantity)+" "+i.iteam_unit,data.view);
+        }
+
+        if(i.iteam_price.equals("0")){
+            getView("iteam_price","-",data.view);
+        }
+        else {
+            getView("iteam_price",NumberEngToBng(i.iteam_price)+" টাকা",data.view);
+        }
         ImageView remove_btn = getView("remove_btn",data.view);
         final EditText iteam_quantity = getView("iteam_quantity",data.view);
 
@@ -1025,7 +1044,6 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
                 ListView l = (ListView) getView("iteam_list",data.parentView);
                 ((EditText) getView("iteam_name",data.parentView)).setText("");
                 l.getLayoutParams().height=0;
-                ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_list",data.parentView), R.layout.sale_pos_pop_iteam_list_price_wise, AlliteamList, "productListShow", 0, AlliteamList.size(),true,data.parentView);
                 ScrollListView.loadListView(Season.applicationContext, (ListView) getView("iteam_added",data.parentView), R.layout.sale_pos_popup_iteam_quantity_list_price_wise, iteamList, "productListQuantityShow", 0, AlliteamList.size(),true,data.parentView);
                 calculateUpdateQuantityPrice(data.parentView);
 

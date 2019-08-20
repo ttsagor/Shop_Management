@@ -660,25 +660,21 @@ public class POSPriceWise extends AppCompatActivity{
         final ListView customer_list = (ListView) data.popupView.findViewById(R.id.customer_list);
         setFontFromView(getView("root_view",data.popupView));
         Button submit_btn = getView("submit_btn",data.popupView);
+        Button submit_btn_due = getView("submit_btn_due",data.popupView);
         final EditText customer_name = getView("customer_name",data.popupView);
         final EditText note_given = getView("note_given",data.popupView);
         final EditText total_amount = getView("total_amount",NumberEngToBng(String.valueOf(finalSaleInvoice.total_amount)),data.popupView);
 
-        Button btn_0 = getView("btn_0",data.popupView);
+        //Button btn_0 = getView("btn_0",data.popupView);
         Button btn_custom = getView("btn_custom",NumberEngToBng(String.valueOf(finalSaleInvoice.total_amount)),data.popupView);
         Button btn_1000 = getView("btn_1000",data.popupView);
         Button btn_500 = getView("btn_500",data.popupView);
         Button btn_100 = getView("btn_100",data.popupView);
         Button btn_50 = getView("btn_50",data.popupView);
         Button btn_20 = getView("btn_20",data.popupView);
-        Button btn_10 = getView("btn_10",data.popupView);
+        //Button btn_10 = getView("btn_10",data.popupView);
 
-        btn_0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculateCheckout("0",data.popupView);
-            }
-        });
+
 
         btn_custom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -716,12 +712,7 @@ public class POSPriceWise extends AppCompatActivity{
                 calculateCheckout("20",data.popupView);
             }
         });
-        btn_10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculateCheckout("10",data.popupView);
-            }
-        });
+
 
         note_given.addTextChangedListener(new TextWatcher() {
             @Override
@@ -743,104 +734,66 @@ public class POSPriceWise extends AppCompatActivity{
                 data.popupWindow.dismiss();
             }
         });
-        submit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                double ta = TypeCasting.parseDouble(NumberBngToEng(total_amount.getText().toString()));
-                double ng = TypeCasting.parseDouble(NumberBngToEng(note_given.getText().toString()));
-                if(note_given.getText().toString().equals(""))
-                {
-                    Toast.makeText(Season.applicationContext, "গ্রহন সিলেক্ট করুন", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
 
-                    if(ta==ng || (ng > ta && customer_name.getText().toString().equals("")))
-                    {
-                        finalSaleInvoice.total_amount = ta;
-                        finalSaleInvoice.note_given = String.valueOf(ng);
-                        finalSaleInvoice.sale_category = "cash";
-                        finalSaleInvoice.customer_name = customer_name.getText().toString().toUpperCase();
-                        finalSaleInvoice.due_amount = "0";
-                        finalSaleInvoice.advance_amount="0";
-                        finalSaleInvoice.sale_type="price_wise";
-                        MyPopupView.showPopupView(R.layout.final_submit_view, "finalSubmitView",data.parentView);
+        ArrayList<Button> buttons = new ArrayList<>();
+        buttons.add(submit_btn);
+        buttons.add(submit_btn_due);
 
-                    }
-                    else
-                    {
-                        finalSaleInvoice.total_amount = ta;
-                        finalSaleInvoice.note_given = String.valueOf(ng);
-                        String customer = customer_name.getText().toString().toUpperCase();
+        for(Button btn : buttons) {
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    double ta = TypeCasting.parseDouble(NumberBngToEng(total_amount.getText().toString()));
+                    double ng = TypeCasting.parseDouble(NumberBngToEng(note_given.getText().toString()));
+                    if (note_given.getText().toString().equals("")) {
+                        Toast.makeText(Season.applicationContext, "গ্রহন সিলেক্ট করুন", Toast.LENGTH_SHORT).show();
+                    } else {
 
-                        boolean cuFlag = false;
-                        for(Customer c : AllCustomer)
-                        {
-                            if(c.customer_name.toUpperCase().equals(customer))
-                            {
-                                cuFlag = true;
-                                break;
+                        if (ta == ng || (ng > ta && customer_name.getText().toString().equals(""))) {
+                            finalSaleInvoice.total_amount = ta;
+                            finalSaleInvoice.note_given = String.valueOf(ng);
+                            finalSaleInvoice.sale_category = "cash";
+                            finalSaleInvoice.customer_name = customer_name.getText().toString().toUpperCase();
+                            finalSaleInvoice.due_amount = "0";
+                            finalSaleInvoice.advance_amount = "0";
+                            finalSaleInvoice.sale_type = "price_wise";
+                            MyPopupView.showPopupView(R.layout.final_submit_view, "finalSubmitView", data.parentView);
+
+                        } else {
+                            finalSaleInvoice.total_amount = ta;
+                            finalSaleInvoice.note_given = String.valueOf(ng);
+                            String customer = customer_name.getText().toString().toUpperCase();
+
+                            boolean cuFlag = false;
+                            for (Customer c : AllCustomer) {
+                                if (c.customer_name.toUpperCase().equals(customer)) {
+                                    cuFlag = true;
+                                    break;
+                                }
                             }
-                        }
-                        if(cuFlag)
-                        {
-                            finalSaleInvoice.customer_name = customer;
-                            if(ta > ng)
-                            {
-                                finalSaleInvoice.due_amount = String.valueOf ((ta - ng));
-                                finalSaleInvoice.sale_category = "due";
+                            if (cuFlag) {
+                                finalSaleInvoice.customer_name = customer;
+                                if (ta > ng) {
+                                    finalSaleInvoice.due_amount = String.valueOf((ta - ng));
+                                    finalSaleInvoice.sale_category = "due";
+                                } else {
+                                    finalSaleInvoice.due_amount = String.valueOf((ng - ta));
+                                    finalSaleInvoice.sale_category = "advance";
+                                }
+                                finalSaleInvoice.sale_type = "price_wise";
+                                MyPopupView.showPopupView(R.layout.final_submit_view, "finalSubmitView", data.parentView);
+                            } else {
+                                Toast.makeText(Season.applicationContext, "Please Select Customer", Toast.LENGTH_SHORT).show();
                             }
-                            else
-                            {
-                                finalSaleInvoice.due_amount = String.valueOf ((ng - ta));
-                                finalSaleInvoice.sale_category = "advance";
-                            }
-                            finalSaleInvoice.sale_type="price_wise";
-                            MyPopupView.showPopupView(R.layout.final_submit_view, "finalSubmitView",data.parentView);
-                        }
-                        else
-                        {
-                            Toast.makeText(Season.applicationContext, "Please Select Customer", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    Debug.print(finalSaleInvoice);
                 }
-                Debug.print(finalSaleInvoice);
-            }
-        });
-
+            });
+        }
 
         ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
-        /*customer_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {}
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,int before, int count) {
 
-                if(s.length() != 0)
-                {
-                    customer_list.setVisibility(View.VISIBLE);
-                    newIteam.clear();
-                    for(Customer i : AllCustomer)
-                    {
-                        if((i.customer_name!=null && i.customer_name.contains(s)) || (i.customer_phone!=null && i.customer_phone.contains(s)))
-                        {
-                            newIteam.add(i);
-                        }
-                    }
-                    ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, newIteam, "customerList", 0, newIteam.size(),true,data.popupView);
-                }
-                else
-                {
-                    customer_list.setVisibility(View.GONE);
-                    calculateCheckoutViewUpdate(data.popupView);
-                    //ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
-                }
-            }
-        });*/
         customer_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -891,41 +844,66 @@ public class POSPriceWise extends AppCompatActivity{
         });
         ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
     }
+    public void setDueCashButton(Button cashButton, Button dueButton, Boolean cashBool, Boolean dueBool)
+    {
+        cashButton.setEnabled(cashBool);
+        dueButton.setEnabled(dueBool);
+        if(cashBool)
+        {
+            cashButton.setBackgroundColor(Color.parseColor("#12584D"));
+
+        }
+        else
+        {
+            cashButton.setBackgroundColor(Color.parseColor("#6ab344"));
+        }
+
+        if(dueBool)
+        {
+            dueButton.setBackgroundColor(Color.parseColor("#D32F2F"));
+        }
+        else
+        {
+            dueButton.setBackgroundColor(Color.parseColor("#F57C00"));
+        }
+        cashButton.setText("নগদ");
+    }
     public void calculateCheckoutViewUpdate(View data)
     {
         //final EditText note_given = getView("note_given",data);
         final EditText customer_name = getView("customer_name",data);
+        final Button cashButton = getView("submit_btn",  data);
+        final Button dueButton = getView("submit_btn_due",  data);
 
         if(customer_name.getText().toString().equals(""))
         {
             Button due = getView("submit_btn",  data);
             if (finalSaleInvoice.total_amount == TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
-                due.setVisibility(View.VISIBLE);
                 getView("due_advance", NumberEngToBng("0"), data);
                 getView("due_advance_txt", "ফেরত", data);
                 setColorView(data, "due_advance_txt", "#12584D");
                 setColorView(data, "due_advance", "#12584D");
-                due = getView("submit_btn", "নগদ", data);
-                due.setBackgroundColor(Color.parseColor("#12584D"));
+                setDueCashButton(cashButton, dueButton, true,false);
             }
             else if (finalSaleInvoice.total_amount > TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
-                due.setVisibility(View.GONE);
-                getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given)-finalSaleInvoice.total_amount))), data);
+                TextView tt = getView("due_advance", data);
+                tt.setSingleLine(false);
+                tt.setText("ক্রেতার নাম\nসিলেক্ট করুন");
                 getView("due_advance_txt", "ফেরত", data);
                 setColorView(data, "due_advance_txt", "#FF0000");
                 setColorView(data, "due_advance", "#FF0000");
+                setDueCashButton(cashButton, dueButton, false,false);
             }
             else if (finalSaleInvoice.total_amount < TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
-                due.setVisibility(View.VISIBLE);
+                //due.setVisibility(View.VISIBLE);
                 getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount))), data);
                 getView("due_advance_txt", "ফেরত", data);
                 setColorView(data, "due_advance_txt", "#12584D");
                 setColorView(data, "due_advance", "#12584D");
-                due = getView("submit_btn", "নগদ", data);
-                due.setBackgroundColor(Color.parseColor("#12584D"));
+                setDueCashButton(cashButton, dueButton, true,false);
             }
         }
         else
@@ -938,30 +916,29 @@ public class POSPriceWise extends AppCompatActivity{
                 getView("due_advance_txt", "ফেরত", data);
                 setColorView(data, "due_advance_txt", "#12584D");
                 setColorView(data, "due_advance", "#12584D");
-                due = getView("submit_btn", "নগদ", data);
-                due.setBackgroundColor(Color.parseColor("#12584D"));
                 finalSaleInvoice.due_amount ="";
                 finalSaleInvoice.advance_amount ="";
+                setDueCashButton(cashButton, dueButton, true,false);
             }
             else if (finalSaleInvoice.total_amount > TypeCasting.parseDouble(finalSaleInvoice.note_given)) {
                 getView("due_advance", NumberEngToBng(String.valueOf((finalSaleInvoice.total_amount - TypeCasting.parseDouble(finalSaleInvoice.note_given)))), data);
                 getView("due_advance_txt", "বাকি", data);
                 setColorView(data, "due_advance_txt", "#FF0000");
                 setColorView(data, "due_advance", "#FF0000");
-                due = getView("submit_btn", "বাকি", data);
-                due.setBackgroundColor(Color.RED);
                 finalSaleInvoice.advance_amount ="";
                 finalSaleInvoice.due_amount = String.valueOf((finalSaleInvoice.total_amount - TypeCasting.parseDouble(finalSaleInvoice.note_given)));
+                setDueCashButton(cashButton, dueButton, false,true);
             }
             else if (finalSaleInvoice.total_amount < TypeCasting.parseDouble(finalSaleInvoice.note_given)) {
                 getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount))), data);
                 getView("due_advance_txt", "আগ্রিম", data);
                 setColorView(data, "due_advance_txt", "#2982a3");
                 setColorView(data, "due_advance", "#2982a3");
-                due = getView("submit_btn", "আগ্রিম", data);
-                due.setBackgroundColor(Color.parseColor("#2982a3"));
                 finalSaleInvoice.due_amount ="";
                 finalSaleInvoice.advance_amount = String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount));
+                setDueCashButton(cashButton, dueButton, true,false);
+                due = getView("submit_btn", "আগ্রিম", data);
+                due.setBackgroundColor(Color.parseColor("#2982a3"));
             }
         }
     }

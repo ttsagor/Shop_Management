@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import com.rezaandreza.shop.Activities.Sale.POS.POS;
 import com.rezaandreza.shop.Activities.Sale.POSPriceWise.POSPriceWise;
+import com.rezaandreza.shop.Activities.Sale.POS_Drawer.POS_Drawer_Ac;
 import com.rezaandreza.shop.Activities.Sale.SaleReport.SalesList;
 import com.rezaandreza.shop.Configuration.Season;
 import com.rezaandreza.shop.Model.Database.User;
@@ -67,7 +68,7 @@ public class DashboardDrawer extends AppCompatActivity
         //Button salelist = getView("salelist");
         sale.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                MyIntent.start(POS.class);
+                MyIntent.start(POS_Drawer_Ac.class);
             }
         });
 

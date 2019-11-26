@@ -35,6 +35,21 @@ public class Season {
 
     }
 
+    public static void __InitiatSeasonAction(Context context)
+    {
+        //--- setting global context
+        applicationContext = context;
+
+        //---Initiating setting in first activity
+        if(!Initialization.__InitializationSucess){
+            Initialization.__StartInitialization(context);
+        }
+
+        //----- Setting global Database Instance
+        DBInstance = new DBHandler(context,null,null,1);
+
+    }
+
     public static void __InitiatSeasonNoActionBar(Context context)
     {
         //--- setting global context

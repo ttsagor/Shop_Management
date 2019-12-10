@@ -23,7 +23,7 @@
                 android:orientation="vertical"
                 android:weightSum="1"
                 android:background="#f3f3f3"
-                android:id="@+id/root_view">
+                android:id="@+id/root_view_list">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,11 +49,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:weightSum="1">
+                                    android:weightSum="1"
+                                    android:background="@drawable/edittext_border_shadow">
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/edittext_border_shadow"
                                         android:layout_weight=".9">
                                         <EditText
                                             android:layout_width="match_parent"
@@ -75,8 +75,9 @@
                                         <ImageView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@android:drawable/ic_menu_add"
-                                            android:scaleType="centerInside"/>
+                                            android:src="@drawable/weight_inactive"
+                                            android:scaleType="centerInside"
+                                            android:id="@+id/product_weight"/>
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -92,11 +93,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="পরিমাণ সহ"
-                                android:id="@+id/with_price"/>
+
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"

@@ -1281,7 +1281,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
             amount_list.setText(NumberEngToBng(fullEquation));
         }
     }
-    double output = 0.0;
+
     public void calPop(final PopupViewData data)
     {
         setFontFromView(getView("root_view",data.popupView));
@@ -1403,8 +1403,8 @@ public class POS_Drawer_Ac extends AppCompatActivity
         btn_equal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                calculateQuantityAmount("=",data.popupView);
 
-                    TextView pop_cal_text = getView("pop_cal_text",NumberEngToBng(String.valueOf(output)),data.popupView);
 
 
             }
@@ -1416,13 +1416,16 @@ public class POS_Drawer_Ac extends AppCompatActivity
 
         TextView pop_cal_text = getView("pop_cal_text",v);
         String fullEquation = pop_cal_text.getText().toString();
-
+        double output = 0.0;
         if(txt.equals("c"))
         {
             if( !fullEquation.trim().equals(""))
             {
                 fullEquation = fullEquation.substring(0, fullEquation.length() - 1);
             }
+        }
+        else if (txt.trim().equals("=")) {
+
         }
         else
         {
@@ -1439,6 +1442,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
             fullEquation = fullEquation.replace("--", "-");
             fullEquation = fullEquation.replace("//", "/");
         }
+
         String[] numbers = fullEquation.split("\\+");
 
         for (String eq : numbers)
@@ -1454,7 +1458,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 }
                 output += multi;
             }
-            if (eq.contains("/")) {
+            else if (eq.contains("/")) {
                 double multi = 1;
                 for (String mul : eq.split("/")) {
                     multi = multi / TypeCasting.parseDouble(mul);
@@ -1462,7 +1466,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 output += multi;
             }
             else
-                {
+            {
                 output += TypeCasting.parseDouble(eq);
             }
         }
@@ -1474,7 +1478,9 @@ public class POS_Drawer_Ac extends AppCompatActivity
         else {
             pop_cal_text.setText(NumberEngToBng(fullEquation));
         }
-        output=0;
+        if (txt.contains("=")) {
+            getView("pop_cal_text", NumberEngToBng(String.valueOf(round1Dec(output))), v);
+        }
     }
     @Override
     public void onBackPressed() {

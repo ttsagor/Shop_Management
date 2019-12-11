@@ -40,6 +40,7 @@ import android.widget.ViewFlipper;
 import com.google.gson.Gson;
 import com.nmaltais.calcdialog.CalcDialog;
 import com.rezaandreza.shop.Configuration.Season;
+import com.rezaandreza.shop.Helper.Debug;
 import com.rezaandreza.shop.Model.Database.Customer;
 import com.rezaandreza.shop.Model.Database.Iteam;
 import com.rezaandreza.shop.Model.Database.SalesInvoice;
@@ -154,14 +155,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
         });
         btn_cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                final CalcDialog calcDialog = new CalcDialog();
-                BigDecimal cValue = new BigDecimal(("0"));
-                calcDialog.setValue(((cValue)));
-
-                FragmentManager fm = getSupportFragmentManager();
-                if (fm.findFragmentByTag("calc_dialog") == null) {
-                    calcDialog.show(fm, "calc_dialog");
-                }
+                MyPopupView.showPopupViewFull(R.layout.sale_popup_calculator,"calPop");
             }
         });
 
@@ -359,6 +353,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
 
 
     }
+
     public void createInvoice(String type)
     {
         try {
@@ -1285,6 +1280,201 @@ public class POS_Drawer_Ac extends AppCompatActivity
             TextView total_amount = getView("total_amount", NumberEngToBng(round1Dec(output)));
             amount_list.setText(NumberEngToBng(fullEquation));
         }
+    }
+    double output = 0.0;
+    public void calPop(final PopupViewData data)
+    {
+        setFontFromView(getView("root_view",data.popupView));
+
+        final Button btn_dot= getView("btn_dot",data.popupView);
+        final Button btn_0 = getView("btn_0",data.popupView);
+        final Button btn_00 = getView("btn_00",data.popupView);
+        final Button btn_1 = getView("btn_1",data.popupView);
+        final Button btn_2 = getView("btn_2",data.popupView);
+        final Button btn_3 = getView("btn_3",data.popupView);
+        final Button btn_4 = getView("btn_4",data.popupView);
+        final Button btn_5 = getView("btn_5",data.popupView);
+        final Button btn_6 = getView("btn_6",data.popupView);
+        final Button btn_7 = getView("btn_7",data.popupView);
+        final Button btn_8 = getView("btn_8",data.popupView);
+        final Button btn_9 = getView("btn_9",data.popupView);
+        final Button btn_equal = getView("btn_equal",data.popupView);
+        final Button btn_add = getView("btn_add",data.popupView);
+        final Button btn_multi = getView("btn_multi",data.popupView);
+        final Button btn_c = getView("btn_c",data.popupView);
+        final Button btn_minus = getView("btn_minus",data.popupView);
+        final Button btn_div = getView("btn_div",data.popupView);
+
+        btn_dot.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount(".",data.popupView);
+            }
+        });
+        btn_0.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("0",data.popupView);
+            }
+        });
+        btn_00.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("00",data.popupView);
+            }
+        });
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("1",data.popupView);
+            }
+        });
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("2",data.popupView);
+            }
+        });
+        btn_3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("3",data.popupView);
+            }
+        });
+        btn_4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("4",data.popupView);
+            }
+        });
+        btn_5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("5",data.popupView);
+            }
+        });
+        btn_6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("6",data.popupView);
+            }
+        });
+        btn_7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("7",data.popupView);
+            }
+        });
+        btn_8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("8",data.popupView);
+            }
+        });
+        btn_9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("9",data.popupView);
+            }
+        });
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("+",data.popupView);
+            }
+        });
+        btn_multi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("x",data.popupView);
+            }
+        });
+        btn_c.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("c",data.popupView);
+            }
+        });
+
+        btn_c.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //amount_list.setText("");
+                calculateQuantityAmount("c",data.popupView);
+                return true;
+            }
+        });
+
+        btn_minus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("-",data.popupView);
+            }
+        });
+        btn_div.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("/",data.popupView);
+            }
+        });
+        btn_equal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                    TextView pop_cal_text = getView("pop_cal_text",NumberEngToBng(String.valueOf(output)),data.popupView);
+
+
+            }
+        });
+    }
+
+    public void calculateQuantityAmount(String txt, View v)
+    {
+
+        TextView pop_cal_text = getView("pop_cal_text",v);
+        String fullEquation = pop_cal_text.getText().toString();
+
+        if(txt.equals("c"))
+        {
+            if( !fullEquation.trim().equals(""))
+            {
+                fullEquation = fullEquation.substring(0, fullEquation.length() - 1);
+            }
+        }
+        else
+        {
+            fullEquation = fullEquation + txt;
+        }
+
+        fullEquation = NumberBngToEng(fullEquation);
+
+        while (fullEquation.contains("--") || fullEquation.contains("//") || fullEquation.contains("++") || fullEquation.contains("xx") || fullEquation.contains(".."))
+        {
+            fullEquation = fullEquation.replace("++", "+");
+            fullEquation = fullEquation.replace("xx", "x");
+            fullEquation = fullEquation.replace("..", ".");
+            fullEquation = fullEquation.replace("--", "-");
+            fullEquation = fullEquation.replace("//", "/");
+        }
+        String[] numbers = fullEquation.split("\\+");
+
+        for (String eq : numbers)
+        {
+            if (eq.trim().equals("")) {
+                continue;
+            }
+
+            if (eq.contains("x")) {
+                double multi = 1;
+                for (String mul : eq.split("x")) {
+                    multi = multi * TypeCasting.parseDouble(mul);
+                }
+                output += multi;
+            }
+            if (eq.contains("/")) {
+                double multi = 1;
+                for (String mul : eq.split("/")) {
+                    multi = multi / TypeCasting.parseDouble(mul);
+                }
+                output += multi;
+            }
+            else
+                {
+                output += TypeCasting.parseDouble(eq);
+            }
+        }
+
+        if(fullEquation.equals(""))
+        {
+            pop_cal_text.setText(NumberEngToBng(fullEquation));
+        }
+        else {
+            pop_cal_text.setText(NumberEngToBng(fullEquation));
+        }
+        output=0;
     }
     @Override
     public void onBackPressed() {

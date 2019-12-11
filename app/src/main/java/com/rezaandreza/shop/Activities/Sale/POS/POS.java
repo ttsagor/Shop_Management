@@ -1264,4 +1264,5 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
             amount_list.setText(NumberEngToBng(fullEquation));
         }
     }
+
 }

@@ -86,6 +86,8 @@ public class POS_Drawer_Ac extends AppCompatActivity
     SalesInvoice finalSaleInvoice = new SalesInvoice();
     ListView iteam_list;
     Boolean weight_flag = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Season.__InitiatSeasonAction(this);
@@ -141,6 +143,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
         final Button btn_add = getView("btn_add");
         final Button btn_multi = getView("btn_multi");
         final Button btn_c = getView("btn_c");
+
         final LinearLayout btn_iteam_list = getView("btn_iteam_list");
         final LinearLayout btn_cash = getView("btn_cash");
         final Button go_to_price_wise = getView("go_to_price_wise");
@@ -244,6 +247,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 calculateQuantityAmount("c");
             }
         });
+
 
         btn_c.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -364,14 +368,14 @@ public class POS_Drawer_Ac extends AppCompatActivity
             Gson g = new Gson();
             finalSaleInvoice.iteam_list = g.toJson(iteamList);
             finalSaleInvoice.sale_category = type;
-            if(NumberBngToEng(date.getText().toString()).equals(DateTimeCalculation.getCurrentDate()))
+            /*if(NumberBngToEng(date.getText().toString()).equals(DateTimeCalculation.getCurrentDate()))
             {
                 finalSaleInvoice.sale_datetime = DateTimeCalculation.getCurrentDateTime();
             }
             else
             {
                 finalSaleInvoice.sale_datetime = NumberBngToEng(date.getText().toString()+" 00:00:01");
-            }
+            }*/
             User u = new User();
             finalSaleInvoice.sale_by = ((User) u.selectAll().get(0)).user_name;
             finalSaleInvoice.status=1;
@@ -398,21 +402,27 @@ public class POS_Drawer_Ac extends AppCompatActivity
         if(cashBool)
         {
             cashButton.setBackgroundColor(Color.parseColor("#12584D"));
+            cashButton.setVisibility(View.VISIBLE);
 
         }
         else
         {
             cashButton.setBackgroundColor(Color.parseColor("#6ab344"));
+            cashButton.setVisibility(View.GONE);
         }
 
         if(dueBool)
         {
             dueButton.setBackgroundColor(Color.parseColor("#D32F2F"));
+            dueButton.setVisibility(View.VISIBLE);
         }
         else
         {
             dueButton.setBackgroundColor(Color.parseColor("#F57C00"));
+            dueButton.setVisibility(View.GONE);
         }
+
+
         cashButton.setText("নগদ");
     }
     public void calculateCheckoutViewUpdate(View data)
@@ -420,9 +430,14 @@ public class POS_Drawer_Ac extends AppCompatActivity
         final EditText customer_name = getView("customer_name",data);
         final Button cashButton = getView("submit_btn",  data);
         final Button dueButton = getView("submit_btn_due",  data);
+        final Button customer_button = getView("customer_button",  data);
+        final EditText note_given = getView("note_given",  data);
+        final TextView note_receive = getView("note_receive",  data);
+        note_receive.setText(NumberEngToBng(note_given.getText().toString()));
+
         if(customer_name.getText().toString().equals(""))
         {
-
+            customer_button.setVisibility(View.GONE);
             if (finalSaleInvoice.total_amount == TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
                 //due.setVisibility(View.VISIBLE);
@@ -445,6 +460,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 setColorView(data, "due_advance_txt", "#FF0000");
                 setColorView(data, "due_advance", "#FF0000");
                 setDueCashButton(cashButton, dueButton, false,false);
+                customer_button.setVisibility(View.VISIBLE);
             }
             else if (finalSaleInvoice.total_amount < TypeCasting.parseDouble(finalSaleInvoice.note_given))
             {
@@ -462,6 +478,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
         }
         else
         {
+            customer_button.setVisibility(View.GONE);
             Button due = getView("submit_btn",  data);
             Button submit_btn_due = getView("submit_btn_due",  data);
             due.setVisibility(View.VISIBLE);
@@ -491,7 +508,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 setDueCashButton(cashButton, dueButton, false,true);
             }
             else if (finalSaleInvoice.total_amount < TypeCasting.parseDouble(finalSaleInvoice.note_given)) {
-                getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount))), data);
+                /*getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount))), data);
                 getView("due_advance_txt", "আগ্রিম", data);
                 setColorView(data, "due_advance_txt", "#2982a3");
                 setColorView(data, "due_advance", "#2982a3");
@@ -499,7 +516,13 @@ public class POS_Drawer_Ac extends AppCompatActivity
                 finalSaleInvoice.advance_amount = String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount));
                 setDueCashButton(cashButton, dueButton, true,false);
                 due = getView("submit_btn", "আগ্রিম", data);
-                due.setBackgroundColor(Color.parseColor("#2982a3"));
+                due.setBackgroundColor(Color.parseColor("#2982a3"));*/
+
+                getView("due_advance", NumberEngToBng(String.valueOf((TypeCasting.parseDouble(finalSaleInvoice.note_given) - finalSaleInvoice.total_amount))), data);
+                getView("due_advance_txt", "ফেরত", data);
+                setColorView(data, "due_advance_txt", "#12584D");
+                setColorView(data, "due_advance", "#12584D");
+                setDueCashButton(cashButton, dueButton, true,false);
             }
         }
     }
@@ -507,8 +530,11 @@ public class POS_Drawer_Ac extends AppCompatActivity
     {
         final EditText note_given = getView("note_given",data);
         final EditText customer_name = getView("customer_name",data);
+        final TextView note_receive = getView("note_receive",data);
+
 
         String amountOld = NumberBngToEng(note_given.getText().toString());
+
         if(!amount.equals(""))
         {
             if(amount.equals("0"))
@@ -593,9 +619,10 @@ public class POS_Drawer_Ac extends AppCompatActivity
         setFontFromView(getView("root_view",data.popupView));
         Button submit_btn = getView("submit_btn",data.popupView);
         Button submit_btn_due = getView("submit_btn_due",data.popupView);
+        Button customer_button = getView("customer_button",data.popupView);
         final EditText customer_name = getView("customer_name",data.popupView);
         final EditText note_given = getView("note_given",data.popupView);
-        final EditText total_amount = getView("total_amount",NumberEngToBng(String.valueOf(finalSaleInvoice.total_amount)),data.popupView);
+        final TextView total_amount = getView("total_amount",NumberEngToBng(String.valueOf(finalSaleInvoice.total_amount)),data.popupView);
 
         //Button btn_0 = getView("btn_0",data.popupView);
         Button btn_custom = getView("btn_custom",NumberEngToBng(String.valueOf(finalSaleInvoice.total_amount)),data.popupView);
@@ -737,14 +764,13 @@ public class POS_Drawer_Ac extends AppCompatActivity
         }
         ScrollListView.loadListView(Season.applicationContext, customer_list, R.layout.sale_pos_popup_customer_list, AllCustomer, "customerList", 0, AllCustomer.size(),true,data.popupView);
 
-        customer_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        customer_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    MyPopupView.showPopupView(R.layout.sale_pos_popup_checkout_customer_name,"popupCustomerSelect",data.popupView);
-                }
+            public void onClick(View v) {
+                MyPopupView.showPopupView(R.layout.sale_pos_popup_checkout_customer_name,"popupCustomerSelect",data.popupView);
             }
         });
+
         /*customer_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {}
@@ -1225,6 +1251,9 @@ public class POS_Drawer_Ac extends AppCompatActivity
         }
     }
 
+
+
+
     public void calculateQuantityAmount(String txt)
     {
 
@@ -1285,6 +1314,24 @@ public class POS_Drawer_Ac extends AppCompatActivity
     public void calPop(final PopupViewData data)
     {
         setFontFromView(getView("root_view",data.popupView));
+        LinearLayout close_calculation = getView("close_calculation",data.popupView);
+        close_calculation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.popupWindow.dismiss();
+            }
+        });
+
+        LinearLayout add_calculation = getView("add_calculation",data.popupView);
+        add_calculation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                TextView pop_cal_text =  getView("pop_cal_text",data.popupView);
+                amount_list.setText(String.valueOf(pop_cal_text.getText()));
+                data.popupWindow.dismiss();
+            }
+        });
 
         final Button btn_dot= getView("btn_dot",data.popupView);
         final Button btn_0 = getView("btn_0",data.popupView);
@@ -1304,7 +1351,19 @@ public class POS_Drawer_Ac extends AppCompatActivity
         final Button btn_c = getView("btn_c",data.popupView);
         final Button btn_minus = getView("btn_minus",data.popupView);
         final Button btn_div = getView("btn_div",data.popupView);
+        final Button btn_cc = getView("btn_cc",data.popupView);
+        final Button btn_per = getView("btn_per",data.popupView);
 
+        btn_cc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("cc",data.popupView);
+            }
+        });
+        btn_per.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculateQuantityAmount("%",data.popupView);
+            }
+        });
         btn_dot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 calculateQuantityAmount(".",data.popupView);
@@ -1397,7 +1456,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
         });
         btn_div.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                calculateQuantityAmount("/",data.popupView);
+                calculateQuantityAmount("÷",data.popupView);
             }
         });
         btn_equal.setOnClickListener(new View.OnClickListener() {
@@ -1413,10 +1472,16 @@ public class POS_Drawer_Ac extends AppCompatActivity
 
     public void calculateQuantityAmount(String txt, View v)
     {
+        if(txt.equals("cc"))
+        {
+            getView("pop_cal_text", " ", v);
+            return;
+        }
 
         TextView pop_cal_text = getView("pop_cal_text",v);
-        String fullEquation = pop_cal_text.getText().toString();
+        String fullEquation = pop_cal_text.getText().toString().trim();
         double output = 0.0;
+
         if(txt.equals("c"))
         {
             if( !fullEquation.trim().equals(""))
@@ -1432,44 +1497,8 @@ public class POS_Drawer_Ac extends AppCompatActivity
             fullEquation = fullEquation + txt;
         }
 
-        fullEquation = NumberBngToEng(fullEquation);
 
-        while (fullEquation.contains("--") || fullEquation.contains("//") || fullEquation.contains("++") || fullEquation.contains("xx") || fullEquation.contains(".."))
-        {
-            fullEquation = fullEquation.replace("++", "+");
-            fullEquation = fullEquation.replace("xx", "x");
-            fullEquation = fullEquation.replace("..", ".");
-            fullEquation = fullEquation.replace("--", "-");
-            fullEquation = fullEquation.replace("//", "/");
-        }
 
-        String[] numbers = fullEquation.split("\\+");
-
-        for (String eq : numbers)
-        {
-            if (eq.trim().equals("")) {
-                continue;
-            }
-
-            if (eq.contains("x")) {
-                double multi = 1;
-                for (String mul : eq.split("x")) {
-                    multi = multi * TypeCasting.parseDouble(mul);
-                }
-                output += multi;
-            }
-            else if (eq.contains("/")) {
-                double multi = 1;
-                for (String mul : eq.split("/")) {
-                    multi = multi / TypeCasting.parseDouble(mul);
-                }
-                output += multi;
-            }
-            else
-            {
-                output += TypeCasting.parseDouble(eq);
-            }
-        }
 
         if(fullEquation.equals(""))
         {
@@ -1479,8 +1508,62 @@ public class POS_Drawer_Ac extends AppCompatActivity
             pop_cal_text.setText(NumberEngToBng(fullEquation));
         }
         if (txt.contains("=")) {
+            output = finalCal(NumberBngToEng("0"+fullEquation));
             getView("pop_cal_text", NumberEngToBng(String.valueOf(round1Dec(output))), v);
         }
+    }
+    public double finalCal(String num)
+    {
+        System.out.println(num);
+        double output = 0.0;
+        if(num.contains("+"))
+        {
+            String[] numbers = num.split("\\+");
+            for (String eq : numbers)
+            {
+                output += finalCal(eq);
+            }
+            return output;
+        }
+        else if(num.contains("-"))
+        {
+            String[] numbers = num.split("-");
+            output=finalCal(numbers[0])*2;
+            for (String eq : numbers)
+            {
+                output -= finalCal(eq);
+            }
+            return output;
+        }
+        else if(num.toLowerCase().contains("x"))
+        {
+            output = 1;
+            String[] numbers = num.split("x");
+            for (String eq : numbers)
+            {
+                output *= finalCal(eq);
+            }
+
+            return output;
+        }
+        else if(num.contains("÷"))
+        {
+            String[] numbers = num.split("÷");
+            output=finalCal(numbers[0])*finalCal(numbers[0]);
+            for (String eq : numbers)
+            {
+                output /= finalCal(eq);
+            }
+            return output;
+        }
+        else if(num.contains("%"))
+        {
+            String[] numbers = num.split("%");
+
+            output=(finalCal(numbers[1])*finalCal(numbers[0]))/100;
+            return output;
+        }
+        return TypeCasting.parseDouble(num);
     }
     @Override
     public void onBackPressed() {
@@ -1495,7 +1578,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.pos__drawer_, menu);
+       // getMenuInflater().inflate(R.menu.pos__drawer_, menu);
         return true;
     }
 

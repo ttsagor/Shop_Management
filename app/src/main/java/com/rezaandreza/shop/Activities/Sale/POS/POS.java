@@ -55,6 +55,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+
+
 import static com.rezaandreza.shop.Helper.NumberConverter.NumberBngToEng;
 import static com.rezaandreza.shop.Helper.NumberConverter.NumberEngToBng;
 import static com.rezaandreza.shop.Model.Database.CustomerActivity.invoiceToActivity;
@@ -153,6 +155,9 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pos);
         Footer.footerMenu(getView("root_view"),this);
+
+
+
         AlliteamList = new ArrayList<>();
         AllCustomer = new ArrayList<>();
         for(Object o : (new Iteam()).selectAll())
@@ -223,6 +228,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
 
         btn_cash.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 createInvoice("Cash");
             }
         });

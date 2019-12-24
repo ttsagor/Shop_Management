@@ -75,23 +75,24 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".4"
-                                android:gravity="center">
+                                android:layout_weight=".6"
+                                android:gravity="center|left">
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="মোট পণ্যের দাম"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                    android:textColor="@color/colorPrimary" />
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:textSize="28dp"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
-                                android:background="@drawable/pos_price_quantity_edittext"
+                                android:layout_weight=".4"
                                 android:gravity="center">
 
-                                <EditText
+                                <TextView
                                     android:id="@+id/total_amount"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -104,7 +105,7 @@
                                     android:textColor="@color/colorPrimary"
                                     android:enabled="false">
 
-                                </EditText>
+                                </TextView>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -126,7 +127,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="গ্রহন"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                    android:textColor="@color/colorPrimary" />
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:textSize="40dp"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -146,7 +149,8 @@
                                     android:selectAllOnFocus="true"
                                     android:textAlignment="center"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                    android:textColor="@color/colorPrimary">
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="50dp">
                                     <requestFocus />
                                 </EditText>
                             </LinearLayout>
@@ -290,44 +294,6 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:weightSum="1"
-                            android:layout_marginTop="20dp">
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".4">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="ক্রেতার নাম"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".6"
-                                android:background="@drawable/pos_price_quantity_edittext"
-                                android:gravity="center">
-
-                                <EditText
-                                    android:id="@+id/customer_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:lines="1"
-                                    android:selectAllOnFocus="true"
-                                    android:textAlignment="center"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                    android:textColor="@color/colorPrimary">
-
-                                </EditText>
-                            </LinearLayout>
-                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -339,6 +305,46 @@
                                 android:visibility="gone">
 
                             </ListView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="30dp"
+                            android:weightSum="1">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".4"
+                                android:gravity="left|center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="গ্রহন"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="@color/colorPrimary"
+                                    android:id="@+id/note_receive_txt"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".6"
+                                android:gravity="center">
+                                <EditText
+                                    android:id="@+id/note_receive"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:inputType="numberDecimal"
+                                    android:lines="1"
+                                    android:selectAllOnFocus="true"
+                                    android:textAlignment="center"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false">
+                                </EditText>
+                            </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -383,12 +389,72 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:weightSum="1"
+                            android:layout_marginTop="20dp">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".4">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ক্রেতার নাম"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="@color/colorPrimary" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".6"
+                                android:gravity="center">
+
+                                <EditText
+                                    android:id="@+id/customer_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:lines="1"
+                                    android:selectAllOnFocus="true"
+                                    android:textAlignment="center"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false">
+                                </EditText>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:paddingTop="30dp"
                             android:weightSum="1">
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".5">
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#F36523"
+                                    android:text="কার্ড"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="#ffffff"
+                                    android:layout_marginLeft="10dp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".50"
+                                android:orientation="vertical">
+                                <Button
+                                    android:id="@+id/customer_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#00AFF0"
+                                    android:text="কাস্টমার"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                    android:textColor="#ffffff"
+                                    android:layout_marginLeft="10dp"
+                                    android:visibility="gone"/>
                                 <Button
                                     android:id="@+id/submit_btn_due"
                                     android:layout_width="match_parent"
@@ -397,12 +463,8 @@
                                     android:text="বাকি"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                                     android:textColor="#ffffff"
-                                    android:layout_marginRight="10dp"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".50">
+                                    android:layout_marginLeft="10dp"
+                                    android:visibility="gone"/>
                                 <Button
                                     android:id="@+id/submit_btn"
                                     android:layout_width="match_parent"

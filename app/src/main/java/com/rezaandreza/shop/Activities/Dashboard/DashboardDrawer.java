@@ -1,8 +1,16 @@
 package com.rezaandreza.shop.Activities.Dashboard;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,12 +21,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.rezaandreza.shop.Activities.Customer.AddCustomer;
+import com.rezaandreza.shop.Activities.Customer.CustomerList;
 import com.rezaandreza.shop.Activities.Sale.POS.POS;
 import com.rezaandreza.shop.Activities.Sale.POSPriceWise.POSPriceWise;
 import com.rezaandreza.shop.Activities.Sale.POS_Drawer.POS_Drawer_Ac;
 import com.rezaandreza.shop.Activities.Sale.SaleReport.SalesList;
 import com.rezaandreza.shop.Configuration.Season;
+import com.rezaandreza.shop.Helper.Debug;
+import com.rezaandreza.shop.Model.Application.NavMenu;
+import com.rezaandreza.shop.Model.Database.SalesInvoice;
 import com.rezaandreza.shop.Model.Database.User;
 import com.rezaandreza.shop.R;
 import com.rezaandreza.shop.System.Intent.MyIntent;
@@ -60,7 +74,7 @@ public class DashboardDrawer extends AppCompatActivity
         User user = new User();
         user = (User) user.selectAll().get(0);
         setView(user);
-        setView(user,navigationView.getHeaderView(0));
+
         setFontFromView(getView("root_view"));
 
         Button sale = getView("sale");
@@ -71,6 +85,11 @@ public class DashboardDrawer extends AppCompatActivity
                 MyIntent.start(POS_Drawer_Ac.class);
             }
         });
+
+
+        menu_setup(navigationView);
+
+
 
        /* salelist.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -115,24 +134,48 @@ public class DashboardDrawer extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        menu_action(item,Season.applicationContext);
+        return true;
+    }
+
+    public static void menu_action(MenuItem item,Context context)
+    {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.home) {
+            MyIntent.start(DashboardDrawer.class);
+        }else if (id == R.id.sale_list) {
+            MyIntent.start(SalesList.class);
+        } else if (id == R.id.customer_list) {
+            MyIntent.start(CustomerList.class);
+        } else if (id == R.id.customer_add) {
+            MyIntent.start(AddCustomer.class);
+        } /*else if (id == R.id.product_list) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.product_add) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.save_list) {
 
         }
+        else if (id == R.id.settings) {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        }*/
+        try {
+            DrawerLayout drawer = (DrawerLayout) ((Activity) context).findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }catch (Exception e){}
+    }
+
+    public static void menu_setup(NavigationView navigationView)
+    {
+        setFontFromView(navigationView.getHeaderView(0));
+        SalesInvoice si = new SalesInvoice();
+        double total_amount = si.sum("total_amount","1=1");
+        double due_amount = si.sum("due_amount","1=1");
+
+        NavMenu nm = new NavMenu(total_amount,total_amount - due_amount,due_amount);
+
+        setView(nm,navigationView.getHeaderView(0));
     }
 }

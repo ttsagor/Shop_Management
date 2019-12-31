@@ -50,4 +50,10 @@ public class Debug {
         System.out.println(output);
         return output;
     }
+
+    public static String println(Object ob)
+    {
+         System.out.println(ob.toString());
+         return ob.toString();
+    }
 }

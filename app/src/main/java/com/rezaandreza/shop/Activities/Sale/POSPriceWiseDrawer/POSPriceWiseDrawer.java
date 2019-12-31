@@ -53,6 +53,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.rezaandreza.shop.Activities.Dashboard.DashboardDrawer.menu_action;
+import static com.rezaandreza.shop.Activities.Dashboard.DashboardDrawer.menu_setup;
 import static com.rezaandreza.shop.Helper.NumberConverter.NumberBngToEng;
 import static com.rezaandreza.shop.Helper.NumberConverter.NumberEngToBng;
 import static com.rezaandreza.shop.Model.Database.CustomerActivity.invoiceToActivity;
@@ -94,7 +96,7 @@ public class POSPriceWiseDrawer extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        menu_setup(navigationView);
 
         setFontFromView(getView("root_view"));
 
@@ -493,6 +495,7 @@ public class POSPriceWiseDrawer extends AppCompatActivity
             Gson g = new Gson();
             finalSaleInvoice.iteam_list = g.toJson(iteamList);
             finalSaleInvoice.sale_category = type;
+            finalSaleInvoice.sale_datetime = DateTimeCalculation.getCurrentDateTime();
             /*if(NumberBngToEng(date.getText().toString()).equals(DateTimeCalculation.getCurrentDate()))
             {
                 finalSaleInvoice.sale_datetime = DateTimeCalculation.getCurrentDateTime();
@@ -1061,24 +1064,7 @@ public class POSPriceWiseDrawer extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        menu_action(item,Season.applicationContext);
         return true;
     }
 }

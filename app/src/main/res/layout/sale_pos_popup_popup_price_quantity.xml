@@ -120,7 +120,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".5"
                                 android:background="@drawable/pos_price_quantity_edittext"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:id="@+id/iteam_quantity_holder">
 
                                 <EditText
                                     android:id="@+id/iteam_quantity"

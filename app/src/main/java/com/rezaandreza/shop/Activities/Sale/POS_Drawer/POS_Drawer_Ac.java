@@ -39,6 +39,7 @@ import android.widget.ViewFlipper;
 
 import com.google.gson.Gson;
 import com.nmaltais.calcdialog.CalcDialog;
+import com.rezaandreza.shop.Activities.Sale.POSPriceWiseDrawer.POSPriceWiseDrawer;
 import com.rezaandreza.shop.Configuration.Season;
 import com.rezaandreza.shop.Helper.Debug;
 import com.rezaandreza.shop.Model.Database.Customer;
@@ -48,6 +49,7 @@ import com.rezaandreza.shop.Model.Database.User;
 import com.rezaandreza.shop.R;
 import com.rezaandreza.shop.System.DateTime.DateTimeCalculation;
 import com.rezaandreza.shop.System.Helper.TypeCasting;
+import com.rezaandreza.shop.System.Intent.MyIntent;
 import com.rezaandreza.shop.System.PopupWindow.MyPopupView;
 import com.rezaandreza.shop.System.PopupWindow.PopupViewData;
 import com.rezaandreza.shop.System.ScrollView.ScrollListView;
@@ -146,9 +148,19 @@ public class POS_Drawer_Ac extends AppCompatActivity
 
         final LinearLayout btn_iteam_list = getView("btn_iteam_list");
         final LinearLayout btn_cash = getView("btn_cash");
+
+        final LinearLayout price_wise_btn = getView("price_wise_btn");
+
         final Button go_to_price_wise = getView("go_to_price_wise");
         // final Button btn_due = getView("btn_due");
         final ImageView btn_cal = getView("btn_cal");
+
+        price_wise_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MyIntent.start(POSPriceWiseDrawer.class);
+                finish();
+            }
+        });
 
         amount_list.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -368,6 +380,7 @@ public class POS_Drawer_Ac extends AppCompatActivity
             Gson g = new Gson();
             finalSaleInvoice.iteam_list = g.toJson(iteamList);
             finalSaleInvoice.sale_category = type;
+            finalSaleInvoice.sale_datetime = DateTimeCalculation.getCurrentDateTime();
             /*if(NumberBngToEng(date.getText().toString()).equals(DateTimeCalculation.getCurrentDate()))
             {
                 finalSaleInvoice.sale_datetime = DateTimeCalculation.getCurrentDateTime();

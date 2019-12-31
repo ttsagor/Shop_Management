@@ -16,9 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activities.Sale.POSPriceWiseDrawer.POSPriceWiseDrawer"
+            android:label="@string/title_activity_posprice_wise_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Activities.Sale.POS_Drawer.POS_Drawer_Ac"
             android:label="@string/title_activity_pos__drawer_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Customer.CustomerTransactionHistoryDetails" />
         <activity android:name=".Activities.Customer.CustomerTransactionHistory" />
         <activity android:name=".Activities.Customer.CustomerDetailsInformation" />

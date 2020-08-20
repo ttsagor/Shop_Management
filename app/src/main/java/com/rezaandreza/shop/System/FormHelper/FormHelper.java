@@ -3,11 +3,12 @@ package com.rezaandreza.shop.System.FormHelper;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.rezaandreza.shop.R;
 

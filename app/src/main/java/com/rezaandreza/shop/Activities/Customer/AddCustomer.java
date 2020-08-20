@@ -1,12 +1,12 @@
 package com.rezaandreza.shop.Activities.Customer;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.nmaltais.calcdialog.CalcDialog;
 import com.rezaandreza.shop.Activities.Dashboard.DashboardDrawer;

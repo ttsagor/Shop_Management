@@ -1,421 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Sale.POS.POS">
-    <LinearLayout
+    android:background="@color/backgroundColor"
+    android:padding="8dp">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sale_det_txrid_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TrxID No: 1001"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@id/sale_date_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sale_date_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="Date: 29/09/2019"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@id/sale_time_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sale_time_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Time: 08:50"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/total_taka_lable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="মোট টাকাঃ "
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/total_taka_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sale_det_txrid_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/total_taka_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="২৩১"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_taka_lable"
+        app:layout_constraintTop_toBottomOf="@id/sale_det_txrid_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/total_items_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="মোট পণ্যঃ "
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/total_items_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_taka_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/total_items_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="০৩"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_items_label"
+        app:layout_constraintTop_toBottomOf="@id/total_taka_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sale_type_labelw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="বিক্রয় ধরনঃ "
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/sale_type_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_items_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sale_type_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="নগদ/বাকি"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sale_type_labelw"
+        app:layout_constraintTop_toBottomOf="@id/total_items_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/customer_name_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="কাস্টমারঃ "
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/customer_name_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sale_type_textView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/customer_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="মোঃ জামান"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/customer_name_label"
+        app:layout_constraintTop_toBottomOf="@id/sale_type_textView" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/calculate_numbers_editText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/root_view"
-        android:background="#f3f3f3">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#F3F3F3"
-            android:weightSum="1">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_weight=".9">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#12584D"
-                    android:padding="5dp"
-                    android:gravity="center">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".4">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="বিক্রয় বিবরণ"
-                            android:textColor="#ffffff"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
-                        android:gravity="center">
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".4"
-                        android:orientation="horizontal"
-                        android:gravity="right"
-                        android:id="@+id/date_select">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="তারিখঃ "
-                            android:textColor="#ffffff"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/registared_date"
-                            android:textColor="#ffffff"/>
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    android:weightSum="1">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:weightSum="1"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".25"
-                            android:orientation="vertical">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:weightSum="1"
-                                android:orientation="horizontal"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".3">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="ক্রেতার নামঃ"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".7">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text=""
-                                        android:id="@+id/customer_name"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:weightSum="1"
-                                android:orientation="horizontal"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="লেনদেনের তারিখঃ"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text=""
-                                        android:id="@+id/transaction_date"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:weightSum="1"
-                                android:orientation="horizontal"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="লেনদেনের সময়ঃ"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text=""
-                                        android:id="@+id/transaction_time"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:weightSum="1"
-                                android:orientation="horizontal"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="লেনদেনের ধরনঃ"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".5">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="নগদ"
-                                        android:id="@+id/sale_category"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                        android:textColor="#000000"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".6"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".4"
-                                    android:gravity="center|left">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="পণ্যের নাম"
-                                        android:textColor="@color/red_background"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".3"
-                                    android:gravity="center">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="পণ্যের পরিমাণ"
-                                        android:textColor="@color/red_background"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight=".3"
-                                    android:gravity="center">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="পণ্যের মূল্য"
-                                        android:textColor="@color/red_background"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <ListView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:divider="@color/transparent"
-                                    android:id="@+id/iteam_list"></ListView>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".15">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:orientation="vertical">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#D9D9D9"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp">
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight=".5"
-                                        android:gravity="center">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="মোট টাকা"
-                                            android:textColor="#000000"
-                                            android:textSize="15dp"/>
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight=".5"
-                                        android:orientation="horizontal"
-                                        android:gravity="center">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="আইটেম"
-                                            android:textColor="#000000"
-                                            android:textSize="15dp"/>
-                                    </LinearLayout>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight=".5"
-                                        android:gravity="center">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="০.০"
-                                            android:textColor="#12584D"
-                                            android:textSize="40dp"
-                                            android:id="@+id/total_amount"
-                                            android:scrollbars = "vertical"
-                                            android:maxLines="1"
-                                            android:gravity="bottom"/>
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight=".5"
-                                        android:orientation="horizontal"
-                                        android:gravity="center">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="০"
-                                            android:textColor="#12584D"
-                                            android:textSize="40dp"
-                                            android:id="@+id/total_quatity"
-                                            android:scrollbars = "vertical"
-                                            android:maxLines="1"
-                                            android:gravity="bottom"/>
-                                    </LinearLayout>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:padding="15dp">
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="সাবমিট করুন"
-                                        android:background="#12584D"
-                                        android:textColor="#ffffff"
-                                        android:textSize="25dp"
-                                        android:id="@+id/btn_submit"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".1">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_margin="10dp">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="হোম"
-                            android:textColor="#12584D"
-                            android:background="@color/transparent"
-                            android:id="@+id/footer_home"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="পণ্যের তালিকা"
-                            android:textColor="#12584D"
-                            android:background="@color/transparent"
-                            android:id="@+id/footer_product_list"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ক্রেতার তালিকা"
-                            android:textColor="#12584D"
-                            android:background="@color/transparent"
-                            android:id="@+id/footer_customer_list"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="বিক্রয় তালিকা"
-                            android:background="@drawable/btn_border_primany"
-                            android:textColor="#ffffff"
-                            android:id="@+id/footer_accounting"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/search_edittext_bg"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/customer_name_textView" />
 
 
-</android.support.constraint.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sale_det_recView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/print_button"
+        app:layout_constraintTop_toBottomOf="@id/calculate_numbers_editText"
+        tools:itemCount="5"
+        tools:listitem="@layout/layout_sales_details_item"
+        tools:orientation="vertical"
+        tools:scrollbars="vertical" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/print_button"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/buttom_bg_orange"
+        android:text="প্রিন্ট করুন"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete_button"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_bg_red"
+        android:text="মুছে ফেলুন"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.rezaandreza.shop.Configuration.Fonts;
 import com.rezaandreza.shop.Configuration.Season;
@@ -23,9 +21,9 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import static com.rezaandreza.shop.System.Helper.TypeCasting.toObject;
-import static com.rezaandreza.shop.System.Helper.TypeCasting.toObjectFromObject;
-import static com.rezaandreza.shop.System.UI.ViewModifier.getView;
+import static com.rezaandreza.shop.System.Helper.TypeCasting.*;
+import static com.rezaandreza.shop.System.Helper.TypeCasting.*;
+
 
 public class LayoutDataRecevier {
     public static Object getViewData(Object obj, HashMap<String,String> map, View v)

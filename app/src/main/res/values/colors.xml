@@ -1,31 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_background">#1976D2</color>
-    <color name="teal_background">#00796B</color>
-    <color name="orange_background">#F57C00</color>
     <color name="red_background">#D32F2F</color>
-    <color name="purple_background">#7B1FA2</color>
 
-    <color name="transparent_button_pressed">#44444444</color>
-    <color name="transparent_button_focused">#44666666</color>
-
-    <color name="colorPrimary">#12584D</color>
-    <color name="colorPrimaryDark">#12584D</color>
-    <color name="colorAccent">#12584D</color>
-
-    <color name="color_android_green">#6ab344</color>
-    <color name="primary_text">#FAFAFA</color>
-    <color name="secondary_text">#FFFFFF</color>
-    <color name="color_donut">#b4dbb9</color>
-    <color name="color_eclair">#f4c58e</color>
-    <color name="color_froyo">#d4a8dd</color>
-    <color name="color_gingerbread">#f7bdc3</color>
-    <color name="color_honeycomb">#fee8ad</color>
-    <color name="color_ice_cream_sandwich">#acd3f5</color>
-    <color name="color_jellybean">#afdb89</color>
-    <color name="color_kitkat">#f9c2c7</color>
-    <color name="color_lollipop">#76c7f1</color>
-    <color name="color_marshmallow">#9ddbd1</color>
     <color name="color_oreo">#0a50bb</color>
     <color name="shimmer_background_color">#b1b1b1</color>
+
+    <color name="colorPrimary">#0C6257</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="backgroundColor">#F3F3F3</color>
+    <color name="orange">#F26522</color>
 </resources>

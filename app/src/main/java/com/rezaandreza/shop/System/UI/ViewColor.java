@@ -13,8 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.rezaandreza.shop.Configuration.Fonts;
 import com.rezaandreza.shop.Configuration.Season;
@@ -24,7 +22,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.rezaandreza.shop.System.UI.ViewModifier.getView;
 
 public class ViewColor {
     public static void setColor(Object obj, HashMap<String,String> map,View v)

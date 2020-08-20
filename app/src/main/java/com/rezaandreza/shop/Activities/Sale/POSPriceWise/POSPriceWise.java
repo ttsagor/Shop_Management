@@ -3,8 +3,6 @@ package com.rezaandreza.shop.Activities.Sale.POSPriceWise;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +18,9 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.nmaltais.calcdialog.CalcDialog;
@@ -57,7 +58,7 @@ import static com.rezaandreza.shop.System.UI.ViewColor.setColorView;
 import static com.rezaandreza.shop.System.UI.ViewModifier.getView;
 import static com.rezaandreza.shop.System.UI.ViewModifier.setFontFromView;
 
-public class POSPriceWise extends AppCompatActivity{
+public class POSPriceWise extends AppCompatActivity {
     ArrayList<Iteam> iteamList = new ArrayList<>();
     ArrayList<Iteam> AlliteamList = new ArrayList<>();
     ArrayList<Customer> AllCustomer = new ArrayList<>();

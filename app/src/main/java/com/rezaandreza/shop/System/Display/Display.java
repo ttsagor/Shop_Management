@@ -2,8 +2,9 @@ package com.rezaandreza.shop.System.Display;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Display {
 
@@ -14,9 +15,12 @@ public class Display {
         a.setRequestedOrientation(orientation);
         if(!diplayActionBar)
         {
-            ActionBar actionBar = ap.getSupportActionBar();
-            actionBar.hide();
+            try {
+                ActionBar actionBar = ap.getSupportActionBar();
+                actionBar.hide();
+            } catch (Exception e) {
 
+            }
         }
     }
 

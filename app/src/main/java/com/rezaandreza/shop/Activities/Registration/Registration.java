@@ -1,7 +1,8 @@
 package com.rezaandreza.shop.Activities.Registration;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezaandreza.shop.Activities.Dashboard.Dashboard;
 import com.rezaandreza.shop.Activities.Registration.NumberVerification.NumberVerification;

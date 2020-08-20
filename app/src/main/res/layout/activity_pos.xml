@@ -188,7 +188,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="পণ্যের তালিকা"
-                                android:background="@drawable/btn_border_primany_blue"
                                 android:textColor="#ffffff"
                                 android:textSize="25dp"
                                 android:id="@+id/btn_iteam_list"/>

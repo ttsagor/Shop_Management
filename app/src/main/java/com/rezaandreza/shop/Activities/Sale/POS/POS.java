@@ -6,9 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +24,9 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.gson.Gson;
 import com.nmaltais.calcdialog.CalcDialog;
@@ -73,7 +73,7 @@ public class POS extends AppCompatActivity implements CalcDialog.CalcDialogCallb
     ArrayList<Iteam> iteamList = new ArrayList<>();
     ArrayList<Iteam> AlliteamList = new ArrayList<>();
     ArrayList<Customer> AllCustomer = new ArrayList<>();
-    private @Nullable
+
     BigDecimal value;
     Iteam cIteam = null;
     private DatePicker datePicker;

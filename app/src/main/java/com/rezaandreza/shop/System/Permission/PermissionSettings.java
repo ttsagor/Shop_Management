@@ -4,21 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
-import com.nabinbhandari.android.permissions.PermissionHandler;
-import com.nabinbhandari.android.permissions.Permissions;
-import com.rezaandreza.shop.Configuration.Permission;
-import com.rezaandreza.shop.Configuration.Season;
+import androidx.core.content.ContextCompat;
+
+import com.nabinbhandari.android.permissions.*;
+import com.rezaandreza.shop.Configuration.*;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class PermissionSettings {
-    public static void setPermission(Permission permission)
+    public static void setPermission()
     {
-        for(String per : permission.permissionList)
+        for(String per : Permission.permissionList)
         {
             Permissions.check(Season.applicationContext, per, null, new PermissionHandler() {
                 @Override

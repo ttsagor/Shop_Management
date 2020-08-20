@@ -25,7 +25,7 @@ public class Initialization extends Application {
     public static void __StartInitialization(Context context)
     {
        //Permission Settings
-       PermissionSettings.setPermission(new Permission());
+       PermissionSettings.setPermission();
 
        // Database Ini
        Migration migration = new Migration();

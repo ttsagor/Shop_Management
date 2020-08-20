@@ -19,8 +19,6 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.rezaandreza.shop.Configuration.Fonts;
 import com.rezaandreza.shop.Configuration.Season;
@@ -107,15 +105,7 @@ public class ViewModifier {
                             Glide.with(Season.applicationContext)
                                     .load(txt)
                                     .thumbnail(Glide.with(Season.applicationContext).load(R.drawable.avatar_background))
-                                    .fitCenter()
-                                    .crossFade()
-                                    .into(new ViewTarget<LinearLayout, GlideDrawable>((LinearLayout) view) {
-                                        @Override
-                                        public void onResourceReady(GlideDrawable resource, GlideAnimation anim) {
-                                            LinearLayout myView = this.view;
-                                            // Set your resource on myView and/or start your animation here.
-                                        }
-                                    });
+                                    .fitCenter();
                             nv.setBackgroundResource(0);
                         }
                     }return (T) view;
@@ -132,7 +122,6 @@ public class ViewModifier {
                         bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         Glide.with(Season.applicationContext)
                                 .load(stream.toByteArray())
-                                .asBitmap()
                                 .into((ImageView) view);
                         nv.setBackgroundResource(0);
 
@@ -146,7 +135,6 @@ public class ViewModifier {
                                     .load(txt)
                                     .placeholder(R.drawable.waiting)
                                     .fitCenter()
-                                    .crossFade()
                                     .into((ImageView) view);
                             nv.setBackgroundResource(0);
                         }

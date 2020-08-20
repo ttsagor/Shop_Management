@@ -1,11 +1,12 @@
 package com.rezaandreza.shop.Activities.Registration.PinGenerate;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezaandreza.shop.Activities.Registration.Registration;
 import com.rezaandreza.shop.Configuration.Season;

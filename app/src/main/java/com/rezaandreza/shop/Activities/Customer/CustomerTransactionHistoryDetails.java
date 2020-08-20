@@ -1,11 +1,12 @@
 package com.rezaandreza.shop.Activities.Customer;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezaandreza.shop.Activities.Footer.Footer;
 import com.rezaandreza.shop.Activities.Sale.POS.IteamModel;

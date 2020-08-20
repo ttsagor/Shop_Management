@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rezaandreza.shop">
+    package="com.rezaandreza.shop" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,15 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".Activities.Sale.POSPriceWiseDrawer.POSPriceWiseDrawer"
-            android:label="@string/title_activity_posprice_wise_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_posprice_wise_drawer" />
         <activity
             android:name=".Activities.Sale.POS_Drawer.POS_Drawer_Ac"
-            android:label="@string/title_activity_pos__drawer_"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_pos__drawer_" />
         <activity android:name=".Activities.Customer.CustomerTransactionHistoryDetails" />
         <activity android:name=".Activities.Customer.CustomerTransactionHistory" />
         <activity android:name=".Activities.Customer.CustomerDetailsInformation" />
@@ -31,14 +29,13 @@
         <activity android:name=".Activities.Sale.POSPriceWise.POSPriceWise" />
         <activity
             android:name=".Activities.Dashboard.DashboardDrawer"
-            android:label="@string/title_activity_dashboard_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_dashboard_drawer"/>
         <activity android:name=".Activities.Registration.PinGenerate.PinGenerate" />
         <activity android:name=".Activities.Registration.Registration" />
         <activity android:name=".Activities.Registration.NumberVerification.NumberVerification" />
         <activity
             android:name=".MainActivity"
-            android:noHistory="true">
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +43,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".System.Service.FirebaseMessageReceiver">
+        <service android:name=".System.Service.FirebaseMessageReceiver" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
